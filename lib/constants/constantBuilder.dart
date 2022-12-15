@@ -27,6 +27,8 @@ TextStyle title = const TextStyle(fontSize: 30, fontWeight: FontWeight.w700, col
 const landingBg = 'assets/images/landing_page_bg.png';
 const loginArt = 'assets/images/login_art.png';
 const loginBg = 'assets/images/login_bg.png';
+const ads1 = 'assets/images/ads-1.png';
+const ads2 = 'assets/images/ads-2.png';
 
 //LOGO
 const cartIcon = 'assets/icons/cart.png';
