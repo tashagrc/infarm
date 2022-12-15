@@ -1,5 +1,6 @@
 import 'package:infarm/constants/constantBuilder.dart';
 import 'package:infarm/pages/authentication_page/register_page.dart';
+import 'package:infarm/pages/homescreen_page/home_page.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
@@ -36,7 +37,10 @@ class LoginPage extends StatelessWidget {
                       ),
                       5.heightBox,
                       button(
-                        color: appYellow, text: "Masuk", textColor: white, onPress: (){}
+                        color: appYellow, text: "Masuk", textColor: white, 
+                        onPress: (){
+                          Get.to(() => const HomePage());
+                        }
                       ).box.width(context.screenWidth - 40).make(),
 
                       5.heightBox,

@@ -8,6 +8,9 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
+
+  bool? isTrue = false;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -42,8 +45,15 @@ class _RegisterPageState extends State<RegisterPage> {
                       Row(
                         children: [
                           Checkbox(
-                            checkColor: appYellow,
-                            value: false, onChanged: (newValue){}
+                            activeColor: appYellow,
+                            checkColor: white,
+                            value: isTrue, 
+                            onChanged: (newValue){
+                              setState(() {
+                                isTrue = newValue;
+                              });
+                              
+                            }
                           ),
 
                           10.widthBox,
@@ -78,7 +88,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       ),
                       5.heightBox,
                       button(
-                        color: appYellow, text: "Buat Akun", textColor: white, onPress: (){}
+                        color: isTrue == true ? appYellow : grey, text: "Buat Akun", textColor: white, onPress: (){}
                       ).box.width(context.screenWidth - 40).make(),
                       5.heightBox,
                       RichText(

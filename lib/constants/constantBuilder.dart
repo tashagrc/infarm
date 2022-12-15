@@ -31,6 +31,7 @@ const loginBg = 'assets/images/login_bg.png';
 //LOGO
 const cartIcon = 'assets/icons/cart.png';
 const cartBg = 'assets/icons/cart_empty.png';
+const categoryIcon = 'assets/icons/category.png';
 const historyIcon = 'assets/icons/history.png';
 const homeIcon = 'assets/icons/home.png';
 const profileIcon = 'assets/icons/profile.png';
