@@ -1,6 +1,5 @@
 import 'package:infarm/constants/constantBuilder.dart';
 import 'package:infarm/pages/cart_page/cart_page.dart';
-import 'package:infarm/pages/category_page/category_page.dart';
 import 'package:infarm/pages/homescreen_page/home_page.dart';
 import 'package:infarm/pages/profile_page/profile_page.dart';
 
@@ -14,7 +13,6 @@ class Navigation extends StatelessWidget {
 
     var navBody = [
       const HomePage(),
-      const CategoryPage(),
       const CartPage(),
       const ProfilePage()
     ];
@@ -39,7 +37,6 @@ class Navigation extends StatelessWidget {
           backgroundColor: appBlue,
           items: [
             BottomNavigationBarItem(icon: Image.asset(homeIcon, width: 26, color: white), label: "Utama"),
-            BottomNavigationBarItem(icon: Image.asset(categoryIcon, width: 26, color: white), label: "Kategori"),
             BottomNavigationBarItem(icon: Image.asset(cartIcon, width: 26, color: white), label: "Keranjang"),
             BottomNavigationBarItem(icon: Image.asset(profileIcon, width: 26, color: white), label: "Akun"),
           ],

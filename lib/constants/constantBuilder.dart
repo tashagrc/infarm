@@ -6,7 +6,7 @@ export 'package:infarm/widgets/textField.dart';
 export 'package:get/get.dart';
 
 //COLORS
-const Color bgWhite = Color(0xffF1F1F1);
+const Color bgWhite = Color(0xffEFEFEF);
 const Color white = Colors.white;
 const Color textfield = Color(0xffEBEBEB);
 const Color grey = Color(0xffA0A0A0);
@@ -29,11 +29,11 @@ const loginArt = 'assets/images/login_art.png';
 const loginBg = 'assets/images/login_bg.png';
 const ads1 = 'assets/images/ads-1.png';
 const ads2 = 'assets/images/ads-2.png';
+const product1 = 'assets/images/product1.png';
 
 //LOGO
 const cartIcon = 'assets/icons/cart.png';
 const cartBg = 'assets/icons/cart_empty.png';
-const categoryIcon = 'assets/icons/category.png';
 const historyIcon = 'assets/icons/history.png';
 const homeIcon = 'assets/icons/home.png';
 const profileIcon = 'assets/icons/profile.png';

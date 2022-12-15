@@ -20,10 +20,10 @@ class _MyAppState extends State<MyApp> {
     return GetMaterialApp(
       title: 'Infarm',
       theme: ThemeData(
-        // scaffoldBackgroundColor: Colors.transparent,
         appBarTheme: const AppBarTheme(
           backgroundColor: Colors.transparent,
         ),
+        scaffoldBackgroundColor: bgWhite,
         fontFamily: regular,
       ),
       home: const LoginPage(),
