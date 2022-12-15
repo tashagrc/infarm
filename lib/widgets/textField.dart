@@ -10,13 +10,14 @@ Widget textField({String? title, String? hint, controller}){
         decoration: InputDecoration(
           fillColor: textfield,
           filled: true,
-          isDense: true,
           hintText: hint!,
           hintStyle: const TextStyle(
             color: grey,
             fontFamily: regular
           ),
-          border: InputBorder.none,
+          enabledBorder: const OutlineInputBorder(
+            borderSide: BorderSide(width: 0, color: Colors.transparent)
+          ),
           focusedBorder: const OutlineInputBorder(
             borderSide: BorderSide(
               color: appBlue
