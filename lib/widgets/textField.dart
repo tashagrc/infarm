@@ -8,6 +8,7 @@ Widget textField({String? title, String? hint, controller}){
       4.heightBox,
       TextFormField(
         decoration: InputDecoration(
+          contentPadding: const EdgeInsets.only(left: 10, ),
           fillColor: textfield,
           filled: true,
           hintText: hint!,

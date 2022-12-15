@@ -1,4 +1,5 @@
 import 'package:infarm/constants/constantBuilder.dart';
+import 'package:infarm/pages/authentication_page/register_page.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
@@ -10,6 +11,7 @@ class LoginPage extends StatelessWidget {
         image: DecorationImage(image: AssetImage(loginBg), fit: BoxFit.fill)
       ),
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         backgroundColor: Colors.transparent,
         body: Stack(
           children: [
@@ -38,13 +40,20 @@ class LoginPage extends StatelessWidget {
                       ).box.width(context.screenWidth - 40).make(),
 
                       5.heightBox,
-                      InkWell(
-                        child: "Belum punya akun? Daftar disini".text.color(darkGrey).make(),
-                        onTap: () {
-                          print('object');
-                        },
-                        
-                      ),
+                      RichText(
+                        text: const TextSpan(
+                          children: [
+                            TextSpan(
+                              text: "Belum punya akun? ",
+                              style: TextStyle(fontFamily: regular, color: darkGrey)
+                            ),
+                            TextSpan(
+                              text: "Daftar disini",
+                              style: TextStyle(fontFamily: bold, color: appYellow)
+                            )
+                          ]
+                        ),
+                      ).onTap((){Get.to(const RegisterPage());}),
                     ],
                   ).box.padding(const EdgeInsets.all(20)).make()
                 ],

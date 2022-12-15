@@ -3,6 +3,7 @@ export 'package:velocity_x/velocity_x.dart';
 export 'package:flutter/material.dart';
 export 'package:infarm/widgets/button.dart';
 export 'package:infarm/widgets/textField.dart';
+export 'package:get/get.dart';
 
 //COLORS
 const Color bgWhite = Color(0xffF1F1F1);
