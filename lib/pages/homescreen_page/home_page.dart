@@ -58,7 +58,7 @@ class HomePage extends StatelessWidget {
                         ),
                         5.heightBox,
                         
-                        //NANTI MASUKIN AJA YAH UNTUK KATEGORINYA
+                        //NANTI MASUKIN KODENYA DISINI AJA YAH UNTUK KATEGORINYA
 
                         //END CATEGORY CODE
 
