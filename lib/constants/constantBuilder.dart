@@ -40,3 +40,5 @@ const forgetPassIcon = 'asssets/icons/forget_pass.png';
 const regular = "OpenSans-Regular";
 const semiBold = "OpenSans-SemiBold";
 const bold = "OpenSans-Bold";
+
+//LIST
