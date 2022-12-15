@@ -19,7 +19,7 @@ class LoginPage extends StatelessWidget {
                   (context.screenHeight * 0.12).heightBox,
                   "Masuk".text.fontFamily(bold).color(appBlue).size(30).make(),
                   20.heightBox,
-                  Image.asset(loginArt).box.size(171, 216).make(),
+                  Image.asset(loginArt).box.size(171, 170).make(),
 
                   Column(
                     children: [
