@@ -8,6 +8,15 @@ const Color grey = Color(0xffA0A0A0);
 const Color appBlue = Color(0xff4D4672);
 const Color appYellow = Color(0xffF9B060);
 
+//STRINGS
+const email = 'Email';
+const emailHint = 'emailmu@example.com';
+const password = 'Password';
+const passwordHint = '* * * * *';
+
+//TEXT STYLE
+TextStyle title = const TextStyle(fontSize: 30, fontWeight: FontWeight.w700, color: appBlue);
+
 //IMAGES
 const landingBg = 'assets/images/landing_page_bg.png';
 const loginArt = 'assets/images/login_art.png';
