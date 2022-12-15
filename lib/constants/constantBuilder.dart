@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 export 'package:velocity_x/velocity_x.dart';
+export 'package:flutter/material.dart';
+export 'package:infarm/widgets/button.dart';
+export 'package:infarm/widgets/textField.dart';
 
 //COLORS
 const Color bgWhite = Color(0xffF1F1F1);
+const Color white = Colors.white;
 const Color textfield = Color(0xffEBEBEB);
 const Color grey = Color(0xffA0A0A0);
+const Color darkGrey = Color(0xff656565);
 const Color appBlue = Color(0xff4D4672);
 const Color appYellow = Color(0xffF9B060);
 
