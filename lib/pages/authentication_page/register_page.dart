@@ -1,9 +1,13 @@
 import 'package:infarm/constants/constantBuilder.dart';
-import 'package:infarm/pages/authentication_page/login_page.dart';
 
-class RegisterPage extends StatelessWidget {
+class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
 
+  @override
+  State<RegisterPage> createState() => _RegisterPageState();
+}
+
+class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return Container(
