@@ -30,23 +30,18 @@ class HomePage extends StatelessWidget {
         ),
         Expanded(
           child: SingleChildScrollView(
-            physics: const BouncingScrollPhysics(),
+            // physics: const BouncingScrollPhysics(),
             child: Column(
               children: [
-                15.heightBox,
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                  child: VxSwiper.builder(
-                    autoPlay: true,
-                    viewportFraction: 1.02,
-                    enlargeCenterPage: true,
-                    autoPlayInterval: const Duration(seconds: 4),
-                    itemCount: ads.length, 
-                    itemBuilder: ((context, index) {
-                      return Image.asset(ads[index], fit: BoxFit.fill,)
-                      .box.roundedSM.clip(Clip.antiAlias).margin(const EdgeInsets.symmetric(horizontal: 5)).make();
-                    })
-                  ),
+                VxSwiper.builder(
+                  autoPlay: true,
+                  viewportFraction: 1.0,
+                  autoPlayInterval: const Duration(seconds: 4),
+                  itemCount: ads.length, 
+                  itemBuilder: ((context, index) {
+                    return Image.asset(ads[index], fit: BoxFit.cover,)
+                    .box.clip(Clip.antiAlias).make();
+                  })
                 ),
                 25.heightBox,
                 Padding(
