@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "614897570031",
+    "project_id": "infarm-6e389",
+    "storage_bucket": "infarm-6e389.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:614897570031:android:99f337d6c33d09401bcb1a",
+        "android_client_info": {
+          "package_name": "com.example.infarm"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "614897570031-leva4mfuae0fa7uk0uosqh36kp199b3l.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.infarm",
+            "certificate_hash": "85ba9ad5693d1c80cd10211566dd6beff7ac022b"
+          }
+        },
+        {
+          "client_id": "614897570031-fnkb41kaahr5qq6e4j00ea5dvj7fsk2b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA2JhhJy9_KicZ1tZUob6Ep2-xT3Af7PlY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "614897570031-fnkb41kaahr5qq6e4j00ea5dvj7fsk2b.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -4,6 +4,8 @@ export 'package:flutter/material.dart';
 export 'package:infarm/widgets/button.dart';
 export 'package:infarm/widgets/textField.dart';
 export 'package:get/get.dart';
+export 'package:firebase_core/firebase_core.dart';
+export 'firebaseConstant.dart';
 
 //COLORS
 const Color bgWhite = Color(0xffEFEFEF);

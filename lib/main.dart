@@ -1,7 +1,10 @@
+
 import 'package:infarm/constants/constantBuilder.dart';
 import 'package:infarm/pages/authentication_page/login_page.dart';
 
-void main(){
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
