@@ -84,7 +84,7 @@ class HomePage extends StatelessWidget {
                   Container(
                     padding: const EdgeInsets.all(10),
                     width: double.infinity,
-                    decoration: const BoxDecoration(color: Color(0xffF83B05,),),
+                    decoration:  const BoxDecoration(image: DecorationImage(image: AssetImage(featuredBg), fit: BoxFit.cover)),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -98,7 +98,7 @@ class HomePage extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 ClipRRect(
-                                  borderRadius: BorderRadius.circular(7),
+                                  borderRadius: const BorderRadius.only(topLeft: Radius.circular(7), topRight: Radius.circular(7)),
                                   child: Image.asset(product1, width: 150, fit: BoxFit.cover,),
                                 ),
                                 
