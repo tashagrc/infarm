@@ -39,6 +39,7 @@ const categoryPupuk = 'assets/images/category4.png';
 const categoryObat = 'assets/images/category2.png';
 const batikBg = 'assets/images/batik_bg.png';
 const featuredBg ='assets/images/featured_bg.png';
+const splashBg = 'assets/images/splash.png';
 
 //ICON
 const cartIcon = 'assets/icons/cart.png';

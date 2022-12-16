@@ -1,12 +1,14 @@
 import 'package:infarm/constants/constantBuilder.dart';
 
-Widget textField({String? title, String? hint, controller}){
+Widget textField({String? title, String? hint, controller, isObscure}){
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
       title!.text.color(appBlue).fontFamily(bold).size(15).make(),
       4.heightBox,
       TextFormField(
+        obscureText: isObscure,
+        controller: controller,
         decoration: InputDecoration(
           contentPadding: const EdgeInsets.only(left: 10, ),
           fillColor: textfield,
