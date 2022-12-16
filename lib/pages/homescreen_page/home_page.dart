@@ -101,16 +101,23 @@ class HomePage extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               ClipRRect(
-                                borderRadius: BorderRadius.circular(8),
+                                borderRadius: BorderRadius.circular(7),
                                 child: Image.asset(product1, width: 150, fit: BoxFit.cover,),
                               ),
                               
                               10.heightBox,
-                              "Pestisida Pesnab".text.fontFamily(semiBold).color(darkGrey).make(),
+                              Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: 8),
+                                child: "Pestisida Pesnab".text.fontFamily(semiBold).color(darkGrey).make(),
+                              ),
                               7.heightBox,
-                              "Rp24.000".text.fontFamily(bold).color(appYellow).size(16).make()
+                              Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: 8),
+                                child: "Rp24.000".text.fontFamily(bold).color(appYellow).size(16).make(),
+                              ),
+                              7.heightBox
                             ],
-                          ).box.white.roundedSM.padding(const EdgeInsets.all(8)).margin(const EdgeInsets.symmetric(horizontal: 4)).make()),
+                          ).box.white.roundedSM.margin(const EdgeInsets.symmetric(horizontal: 4)).make()),
                         ),
                       ),
                     ],  
