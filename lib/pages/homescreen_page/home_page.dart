@@ -58,49 +58,36 @@ class HomePage extends StatelessWidget {
                 ),
                 5.heightBox,
                 
-                //NANTI MASUKIN KODENYA DISINI AJA YAH UNTUK KATEGORINYA
                 Container(
-                          padding: const EdgeInsets.all(2),
-                          child: GridView.builder(
-                              shrinkWrap: true,
-                              itemCount: 4,
-                              gridDelegate:
-                                  const SliverGridDelegateWithFixedCrossAxisCount(
-                                      crossAxisCount: 2,
-                                      mainAxisSpacing: 10,
-                                      crossAxisSpacing: 10,
-                                      mainAxisExtent: 100),
-                              itemBuilder: (context, index) {
-                                return Stack(
-                                  children: [
-                                    Image.asset(categoryImages[index],
-                                        height: 100,
-                                        width: 300,
-                                        fit: BoxFit.cover),
-                                    categoryNameList[
-                                            index] // gmn caranya bikin text jd center
-                                        .text
-                                        .color(white)
-                                        .align(TextAlign.center)
-                                        .make(),
-                                  ],
-                                )
-                                    .box
-                                    .white
-                                    .rounded
-                                    .clip(Clip.antiAlias)
-                                    .outerShadowSm
-                                    .make();
-                              }),
-                        ),
-                //END CATEGORY CODE
+                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                  child: GridView.builder(
+                    padding: const EdgeInsets.all(0),
+                    shrinkWrap: true,
+                    itemCount: 4,
+                    physics: const NeverScrollableScrollPhysics(),
+                    gridDelegate:const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      mainAxisSpacing: 10,
+                      crossAxisSpacing: 10,
+                      mainAxisExtent: 100
+                    ),
+                    itemBuilder: (context, index) {
+                      return Stack(
+                        children: [
+                          Image.asset(categoryImages[index], height: 100, width: 300, fit: BoxFit.cover),
+                          Center(child: categoryNameList[index].text.color(white).align(TextAlign.center).fontFamily(bold).size(20).make()),
+                        ],
+                      ).box.white.roundedSM.clip(Clip.antiAlias).outerShadowSm.make();
+                    }
+                  ),
+                ),
 
                 10.heightBox,
                 
                 Container(
                   padding: const EdgeInsets.all(10),
                   width: double.infinity,
-                  decoration: const BoxDecoration(color: Color(0xffF83B05)),
+                  decoration: const BoxDecoration(color: Color(0xffF83B05,),),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -148,16 +135,23 @@ class HomePage extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         ClipRRect(
-                          borderRadius: BorderRadius.circular(8),
+                          borderRadius: const BorderRadius.only(topLeft: Radius.circular(8), topRight: Radius.circular(8)),
                           child: Image.asset(product1, width: 200,height: 170, fit: BoxFit.cover)
                         ),
                         const Spacer(),
-                        "Pestisida Pesnab".text.fontFamily(semiBold).color(darkGrey).make(),
+                        
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 8),
+                          child: "Pestisida Pesnab".text.fontFamily(semiBold).color(darkGrey).make(),
+                        ),
                         10.heightBox,
-                        "Rp24.000".text.fontFamily(bold).color(appYellow).size(16).make(),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 8),
+                          child: "Rp24.000".text.fontFamily(bold).color(appYellow).size(16).make(),
+                        ),
                         10.heightBox,
                       ],
-                    ).box.white.margin(const EdgeInsets.symmetric(horizontal: 4)).padding(const EdgeInsets.all(8)).roundedSM.make();
+                    ).box.white.margin(const EdgeInsets.symmetric(horizontal: 4)).roundedSM.make();
                   },
                 ),
               ],
