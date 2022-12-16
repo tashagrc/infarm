@@ -21,7 +21,8 @@ const password = 'Password';
 const passwordHint = '* * * * *';
 
 //TEXT STYLE
-TextStyle title = const TextStyle(fontSize: 30, fontWeight: FontWeight.w700, color: appBlue);
+TextStyle title =
+    const TextStyle(fontSize: 30, fontWeight: FontWeight.w700, color: appBlue);
 
 //IMAGES
 const landingBg = 'assets/images/landing_page_bg.png';
@@ -30,6 +31,10 @@ const loginBg = 'assets/images/login_bg.png';
 const ads1 = 'assets/images/ads-1.png';
 const ads2 = 'assets/images/ads-2.png';
 const product1 = 'assets/images/product1.png';
+const category_pestisida = 'assets/images/category3.png';
+const category_benih = 'assets/images/category1.png';
+const category_pupuk = 'assets/images/category4.png';
+const category_obat = 'assets/images/category2.png';
 
 //LOGO
 const cartIcon = 'assets/icons/cart.png';
@@ -45,3 +50,12 @@ const semiBold = "OpenSans-SemiBold";
 const bold = "OpenSans-Bold";
 
 //LIST
+
+// CATEGORY
+const categoryNameList = ["Pestisida", "Pupuk", "Benih", "Obat Tanaman"];
+const categoryImages = [
+  category_pestisida,
+  category_benih,
+  category_pupuk,
+  category_obat
+];

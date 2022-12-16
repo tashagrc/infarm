@@ -59,7 +59,40 @@ class HomePage extends StatelessWidget {
                 5.heightBox,
                 
                 //NANTI MASUKIN KODENYA DISINI AJA YAH UNTUK KATEGORINYA
-
+                Container(
+                          padding: const EdgeInsets.all(2),
+                          child: GridView.builder(
+                              shrinkWrap: true,
+                              itemCount: 4,
+                              gridDelegate:
+                                  const SliverGridDelegateWithFixedCrossAxisCount(
+                                      crossAxisCount: 2,
+                                      mainAxisSpacing: 10,
+                                      crossAxisSpacing: 10,
+                                      mainAxisExtent: 100),
+                              itemBuilder: (context, index) {
+                                return Stack(
+                                  children: [
+                                    Image.asset(categoryImages[index],
+                                        height: 100,
+                                        width: 300,
+                                        fit: BoxFit.cover),
+                                    categoryNameList[
+                                            index] // gmn caranya bikin text jd center
+                                        .text
+                                        .color(white)
+                                        .align(TextAlign.center)
+                                        .make(),
+                                  ],
+                                )
+                                    .box
+                                    .white
+                                    .rounded
+                                    .clip(Clip.antiAlias)
+                                    .outerShadowSm
+                                    .make();
+                              }),
+                        ),
                 //END CATEGORY CODE
 
                 10.heightBox,
