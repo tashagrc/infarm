@@ -88,6 +88,7 @@ class ProfilePage extends StatelessWidget {
                   ),
                   25.heightBox,
                   ListView.separated(
+                    physics: const NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
                     separatorBuilder: (context, index) {
                       return const Divider(color: grey,);
