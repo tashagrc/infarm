@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:infarm/constants/constantBuilder.dart';
 import 'package:infarm/pages/authentication_page/login_page.dart';
 
@@ -23,7 +21,7 @@ class _MyAppState extends State<MyApp> {
         appBarTheme: const AppBarTheme(
           backgroundColor: Colors.transparent,
         ),
-        scaffoldBackgroundColor: bgWhite,
+        scaffoldBackgroundColor: Colors.transparent,
         fontFamily: regular,
       ),
       home: const LoginPage(),

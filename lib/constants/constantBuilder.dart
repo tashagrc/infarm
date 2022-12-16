@@ -35,14 +35,17 @@ const categoryPestisida = 'assets/images/category3.png';
 const categoryBenih = 'assets/images/category1.png';
 const categoryPupuk = 'assets/images/category4.png';
 const categoryObat = 'assets/images/category2.png';
+const batikBg = 'assets/images/batik_bg.png';
 
-//LOGO
+//ICON
 const cartIcon = 'assets/icons/cart.png';
 const cartBg = 'assets/icons/cart_empty.png';
 const historyIcon = 'assets/icons/history.png';
 const homeIcon = 'assets/icons/home.png';
 const profileIcon = 'assets/icons/profile.png';
 const forgetPassIcon = 'asssets/icons/forget_pass.png';
+const profilePic = 'assets/icons/profilePic.png';
+const favIcon = 'assets/icons/favourite.png';
 
 // FONT
 const regular = "OpenSans-Regular";
