@@ -67,10 +67,27 @@ class EditProfilePage extends StatelessWidget {
                 
                 Column(
                   children: [
-                    textField(hint: "Nama",title: "Nama Lengkap",isObscure: false, controller: controller.nameController),
+                    textField(
+                      hint: "Nama",
+                      title: "Nama Lengkap",
+                      isObscure: false,
+                      controller: controller.nameController,
+                    ),
                     10.heightBox,
-                    textField(hint: "Password",title: "Password",isObscure: true, controller: controller.passController),
-                    20.heightBox,
+                    textField(
+                      hint: "Password",
+                      title: "Password",isObscure: true,
+                      controller: controller.oldPassController,
+                      
+                    ),
+                    10.heightBox,
+                    textField(
+                      hint: "Password baru",
+                      title: "Password Baru",isObscure: true,
+                      controller: controller.newPassController,
+                      
+                    ),
+                    30.heightBox,
                     controller.isLoading.value 
                     ?const Center(child: CircularProgressIndicator(valueColor: AlwaysStoppedAnimation(appBlue),))
                     :SizedBox(
@@ -78,14 +95,35 @@ class EditProfilePage extends StatelessWidget {
                       child: button(
                         color: appBlue, 
                         onPress: () async {
+
                           controller.isLoading(true);
-                          await controller.uploadProfilePic();
-                          await controller.updateProfile(
-                            imgUrl: controller.profileImgURL,
-                            name: controller.nameController.text,
-                            password: controller.passController.text
-                          );
-                          VxToast.show(context, msg: "Perubahan berhasil disimpan");
+
+                          //KONDISI JIKA USER TIDAK MENGUBAH PROFILE PIC
+                          if(controller.profileImg.value.isNotEmpty){
+                            await controller.uploadProfilePic();
+                          }else{
+                            controller.profileImgURL = data['imageUrl'];
+                          }
+
+                          //KONDISI JIKA PASSWORD LAMA SAMA DENGAN PASSWORD BARU
+                          if(data['password'] == controller.oldPassController.text){
+
+                            controller.changeAuthPassword(
+                              email: data['email'],
+                              password: controller.oldPassController.text,
+                              newPassword: controller.newPassController.text
+                            );
+
+                            await controller.updateProfile(
+                              imgUrl: controller.profileImgURL,
+                              name: controller.nameController.text,
+                              password: controller.newPassController.text
+                            );
+                            VxToast.show(context, msg: "Perubahan berhasil disimpan");
+                          }else{
+                            VxToast.show(context, msg: "Password salah!");
+                            controller.isLoading(false);
+                          }
                         },
                         textColor: white,
                         text: "Simpan",

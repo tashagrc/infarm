@@ -15,7 +15,8 @@ class ProfileController extends GetxController {
   var isLoading = false.obs;
 
   var nameController = TextEditingController();
-  var passController = TextEditingController();
+  var oldPassController = TextEditingController();
+  var newPassController = TextEditingController();
 
   changeImage(context) async {
     try {
@@ -46,5 +47,15 @@ class ProfileController extends GetxController {
       'imageUrl': imgUrl,
     }, SetOptions(merge: true));
     isLoading(false);
+  }
+
+  changeAuthPassword({email, password, newPassword}) async{
+    final cred = EmailAuthProvider.credential(email: email, password: password);
+
+    await currentUser!.reauthenticateWithCredential(cred).then((value) => {
+      currentUser!.updatePassword(newPassword)
+    }).catchError((error){
+      print(error.toString());
+    });
   }
 }

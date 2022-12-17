@@ -114,7 +114,6 @@ class ProfilePage extends StatelessWidget {
                               onTap: () {
                                 if(index == 2){
                                   controller.nameController.text = data['name'];
-                                  controller.passController.text = data['password'];
                                   Get.to(() => EditProfilePage(data: data,));
                                 }else{
                                   Get.to(() => pageList[index]);
