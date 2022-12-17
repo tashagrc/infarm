@@ -1,9 +1,5 @@
 
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:infarm/constants/constantBuilder.dart';
-import 'package:infarm/pages/authentication_page/login_page.dart';
-import 'package:infarm/pages/homescreen_page/home_page.dart';
-import 'package:infarm/pages/homescreen_page/navigation.dart';
 import 'package:infarm/pages/splash_screen.dart';
 
 void main() async {
@@ -27,7 +23,7 @@ class _MyAppState extends State<MyApp> {
       title: 'Infarm',
       theme: ThemeData(
         appBarTheme: const AppBarTheme(
-          backgroundColor: Colors.transparent,
+          backgroundColor: appBlue,
         ),
         scaffoldBackgroundColor: bgWhite,
         fontFamily: regular,

@@ -1,6 +1,8 @@
 import 'package:infarm/constants/constantBuilder.dart';
 import 'package:infarm/controller/auth_controller.dart';
+import 'package:infarm/controller/profile_controller.dart';
 import 'package:infarm/pages/authentication_page/login_page.dart';
+import 'package:infarm/pages/profile_page/edit_profile_page.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
@@ -8,8 +10,11 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
+    var controller = Get.put(ProfileController());
+
     const btnList = ["Pesananmu", "Favorit", "Ubah Profile"];
     const btnIcon = [historyIcon, favIcon, profileIcon];
+    const pageList = [EditProfilePage(), EditProfilePage(), EditProfilePage()];
 
     return Scaffold(
       body: Stack(
@@ -55,7 +60,7 @@ class ProfilePage extends StatelessWidget {
                     ),
                   ),
 
-                  13.heightBox,
+                  5.heightBox,
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
@@ -64,17 +69,10 @@ class ProfilePage extends StatelessWidget {
                         children: [
                           "00".text.fontFamily(bold).color(darkGrey).size(16).make(),
                           5.heightBox,
-                          "Item keranjang".text.color(darkGrey).align(TextAlign.center).make(),
+                          "Item di keranjang".text.color(darkGrey).align(TextAlign.center).make(),
                         ],
-                      ).box.white.roundedSM.width(context.screenWidth/3.4).height(75).padding(const EdgeInsets.all(4)).make(),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          "90".text.fontFamily(bold).color(darkGrey).size(16).make(),
-                          5.heightBox,
-                          "Favorit".text.color(darkGrey).make(),
-                        ],
-                      ).box.white.roundedSM.width(context.screenWidth/3.4).height(75).padding(const EdgeInsets.all(4)).make(),
+                      ).box.white.roundedSM.width(context.screenWidth/2.2).height(75).padding(const EdgeInsets.all(4)).make(),
+                      
                       Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -82,7 +80,7 @@ class ProfilePage extends StatelessWidget {
                           5.heightBox,
                           "Total transaksi".text.color(darkGrey).make(),
                         ],
-                      ).box.white.roundedSM.width(context.screenWidth/3.4).height(75).padding(const EdgeInsets.all(4)).make(),
+                      ).box.white.roundedSM.width(context.screenWidth/2.2).height(75).padding(const EdgeInsets.all(4)).make(),
                     
                     ],
                   ),
@@ -98,7 +96,9 @@ class ProfilePage extends StatelessWidget {
                       return ListTile(
                         leading: Image.asset(btnIcon[index], width: 22, color: appBlue,),
                         title: btnList[index].text.fontFamily(semiBold).make(),
-
+                        onTap: () {
+                          Get.to(() => pageList[index]);
+                        },
                       );
                     },
                   ),

@@ -32,10 +32,12 @@ class _SplashScreenState extends State<SplashScreen> {
 
   routeScreen(){
     Future.delayed(const Duration(seconds: 3), () {
-      // Get.to(() => const LoginPage());
       auth.authStateChanges().listen((User? user) { 
-        if(user == null && mounted) Get.to(() => const LoginPage());
-        else Get.to(()=> const Navigation());
+        if(user == null && mounted) {
+          Get.to(() => const LoginPage());
+        } else {
+          Get.to(()=> const Navigation());
+        }
       });
     });
   }
