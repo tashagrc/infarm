@@ -11,6 +11,7 @@ export 'firebaseConstant.dart';
 const Color bgWhite = Color(0xffEFEFEF);
 const Color white = Colors.white;
 const Color textfield = Color(0xffEBEBEB);
+const Color lightGrey = Color.fromARGB(255, 227, 227, 227);
 const Color grey = Color(0xffA0A0A0);
 const Color darkGrey = Color(0xff656565);
 const Color appBlue = Color(0xff4D4672);
@@ -38,7 +39,7 @@ const categoryBenih = 'assets/images/category1.png';
 const categoryPupuk = 'assets/images/category4.png';
 const categoryObat = 'assets/images/category2.png';
 const batikBg = 'assets/images/batik_bg.png';
-const featuredBg ='assets/images/featured_bg.png';
+const featuredBg = 'assets/images/featured_bg.png';
 const splashBg = 'assets/images/splash.png';
 
 //ICON

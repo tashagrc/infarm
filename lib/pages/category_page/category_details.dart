@@ -1,4 +1,5 @@
 import 'package:infarm/constants/constantBuilder.dart';
+import 'package:infarm/pages/category_page/item_details.dart';
 
 class CategoryDetails extends StatelessWidget {
   final String? title;
@@ -102,7 +103,11 @@ class CategoryDetails extends StatelessWidget {
                                     .outerShadowSm
                                     .margin(const EdgeInsets.symmetric(
                                         horizontal: 4))
-                                    .make();
+                                    .make()
+                                    .onTap(() {
+                                  Get.to(() => const ItemDetails(
+                                      title: "Pestisida dummy"));
+                                });
                               }))
                     ],
                   ))))

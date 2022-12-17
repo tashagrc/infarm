@@ -1,4 +1,3 @@
-
 import 'package:infarm/constants/constantBuilder.dart';
 import 'package:infarm/pages/splash_screen.dart';
 
@@ -16,13 +15,13 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
       title: 'Infarm',
       theme: ThemeData(
         appBarTheme: const AppBarTheme(
+          iconTheme: IconThemeData(color: darkGrey),
           backgroundColor: appBlue,
         ),
         scaffoldBackgroundColor: bgWhite,
