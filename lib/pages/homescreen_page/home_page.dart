@@ -32,7 +32,6 @@ class HomePage extends StatelessWidget {
           ),
           Expanded(
             child: SingleChildScrollView(
-              // physics: const BouncingScrollPhysics(),
               child: Column(
                 children: [
                   VxSwiper.builder(
@@ -61,7 +60,7 @@ class HomePage extends StatelessWidget {
                   ),
                   5.heightBox,
 
-                  // kategori
+                  // CATEGORY
                   Container(
                     padding: const EdgeInsets.symmetric(
                         horizontal: 10, vertical: 10),
@@ -106,6 +105,7 @@ class HomePage extends StatelessWidget {
 
                   10.heightBox,
 
+                  //PRODUK UNGGULAN
                   Container(
                     padding: const EdgeInsets.all(10),
                     width: double.infinity,
@@ -178,6 +178,8 @@ class HomePage extends StatelessWidget {
                     ),
                   ),
                   30.heightBox,
+
+                  //SEMUA PRODUK
                   Padding(
                     padding: const EdgeInsets.all(10),
                     child: Align(

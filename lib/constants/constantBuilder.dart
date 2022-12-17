@@ -59,7 +59,7 @@ const bold = "OpenSans-Bold";
 //LIST
 
 // CATEGORY
-const categoryNameList = ["Pestisida", "Pupuk", "Benih", "Obat\nTanaman"];
+const categoryNameList = ["Pestisida", "Pupuk", "Bibit", "Nutrisi\nTanaman"];
 const categoryImages = [
   categoryPestisida,
   categoryBenih,
