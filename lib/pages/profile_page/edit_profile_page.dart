@@ -3,7 +3,10 @@ import 'package:infarm/controller/profile_controller.dart';
 import '../../constants/constantBuilder.dart';
 
 class EditProfilePage extends StatelessWidget {
-  const EditProfilePage({super.key});
+
+  final dynamic data;
+
+  const EditProfilePage({super.key, this.data});
 
   @override
   Widget build(BuildContext context) {
@@ -28,14 +31,27 @@ class EditProfilePage extends StatelessWidget {
             Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                controller.profileImg.isEmpty 
+
+                //JIKA URL IMAGE DAN CONTROLLER PATHNYA EMPTY
+                data['imageUrl'] == '' && controller.profileImg.isEmpty 
                   ? Image.asset(profilePic, width: 85, fit: BoxFit.cover,).box.roundedFull.clip(Clip.antiAlias).make()
-                  : Image.file(
-                      File(controller.profileImg.value),
-                      width: 85,
-                      height: 85,
-                      fit: BoxFit.cover,
-                    ).box.roundedFull.clip(Clip.antiAlias).make(),
+                  
+                  //JIKA DATA NOT EMPTY TAPI CONTROLLERNYA EMPTY
+                  : data['imageUrl'] != '' && controller.profileImg.isEmpty
+                    ? Image.network(
+                        data['imageUrl'],
+                        width: 85,
+                        height: 85,
+                        fit: BoxFit.cover,
+                      ).box.roundedFull.clip(Clip.antiAlias).make()
+                    
+                    //MASUK JIKA KEDUANYA EMPTY
+                    : Image.file(
+                        File(controller.profileImg.value),
+                        width: 85,
+                        height: 85,
+                        fit: BoxFit.cover,
+                      ).box.roundedFull.clip(Clip.antiAlias).make(),
                 10.heightBox,
                 button(
                   color: appBlue, 
@@ -47,18 +63,29 @@ class EditProfilePage extends StatelessWidget {
                 ),
                 const Divider(),
                 35.heightBox,
-      
+                
                 Column(
                   children: [
-                    textField(hint: "Nama",title: "Nama Lengkap",isObscure: false),
+                    textField(hint: "Nama",title: "Nama Lengkap",isObscure: false, controller: controller.nameController),
                     10.heightBox,
-                    textField(hint: "Password",title: "Password",isObscure: true),
+                    textField(hint: "Password",title: "Password",isObscure: true, controller: controller.passController),
                     20.heightBox,
-                    SizedBox(
+                    controller.isLoading.value 
+                    ?const Center(child: CircularProgressIndicator(valueColor: AlwaysStoppedAnimation(appBlue),))
+                    :SizedBox(
                       width: context.screenWidth,
                       child: button(
                         color: appBlue, 
-                        onPress: (){},
+                        onPress: () async {
+                          controller.isLoading(true);
+                          await controller.uploadProfilePic();
+                          await controller.updateProfile(
+                            imgUrl: controller.profileImgURL,
+                            name: controller.nameController.text,
+                            password: controller.passController.text
+                          );
+                          VxToast.show(context, msg: "Perubahan berhasil disimpan");
+                        },
                         textColor: white,
                         text: "Simpan",
                       ),
