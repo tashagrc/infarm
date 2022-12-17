@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:infarm/constants/constantBuilder.dart';
+import 'package:infarm/constants/firebaseConstant.dart';
 import 'package:infarm/pages/authentication_page/login_page.dart';
 import 'package:infarm/pages/homescreen_page/navigation.dart';
 
@@ -34,9 +35,9 @@ class _SplashScreenState extends State<SplashScreen> {
     Future.delayed(const Duration(seconds: 3), () {
       auth.authStateChanges().listen((User? user) { 
         if(user == null && mounted) {
-          Get.to(() => const LoginPage());
+          Get.offAll(() => const LoginPage());
         } else {
-          Get.to(()=> const Navigation());
+          Get.offAll(()=> const Navigation());
         }
       });
     });

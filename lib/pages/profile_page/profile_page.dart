@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:infarm/constants/constantBuilder.dart';
 import 'package:infarm/controller/auth_controller.dart';
 import 'package:infarm/controller/profile_controller.dart';
@@ -17,7 +18,8 @@ class ProfilePage extends StatelessWidget {
     const btnList = ["Pesananmu", "Favorit", "Ubah Profile"];
     const btnIcon = [historyIcon, favIcon, profileIcon];
     List pageList = [const EditProfilePage(), const EditProfilePage(), const EditProfilePage()];
-
+    User? currentUser = auth.currentUser;
+    
     return Scaffold(
       body: StreamBuilder(
         stream: FirestorServices.getUser(currentUser!.uid),

@@ -19,6 +19,7 @@ class EditProfilePage extends StatelessWidget {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.transparent,
+        leading: IconButton(onPressed: () {Get.back();}, icon: const Icon(Icons.arrow_back_ios_new)),
       ),
       body: Obx(() =>
         Stack(
