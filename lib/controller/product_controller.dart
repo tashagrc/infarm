@@ -1,9 +1,11 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
 import 'package:infarm/constants/constantBuilder.dart';
 import 'package:infarm/models/category_model.dart';
 
 class ProductController extends GetxController{
 
+  User? currentUser = auth.currentUser;
   var quantity = 0.obs;
   var totalPrice = 0.obs;
 
@@ -32,11 +34,28 @@ class ProductController extends GetxController{
     if(quantity.value > 0){
       quantity.value--;
     }
-    
+  }
+
+  reset(){
+    totalPrice.value = 0;
+    quantity.value = 0;
   }
 
   calculateTotalPrice(price){
     totalPrice.value = price*quantity.value;
+  }
+
+  addToCart({title, img, sellerName, quantity, totalPrice, context}) async {
+    await firestore.collection(cartCollection).doc().set({
+      'productName': title,
+      'images': img,
+      'sellerName': sellerName,
+      'quantity': quantity,
+      'totalPrice': totalPrice,
+      'userId': currentUser!.uid
+    }).catchError((e){
+      VxToast.show(context, msg: e.toString());
+    });
   }
 
 
