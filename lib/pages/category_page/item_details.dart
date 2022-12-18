@@ -245,7 +245,7 @@ class ItemDetails extends StatelessWidget {
                 onPress: () {
                   controller.addToCart(
                     title: data['pName'],
-                    img: data['pImages'],
+                    img: data['pImages'][0],
                     sellerName: data['pSeller'],
                     quantity: controller.quantity.value,
                     totalPrice: controller.totalPrice.value,

@@ -10,4 +10,12 @@ class FirestorServices{
     return firestore.collection(productsCollection).where('pCategory', isEqualTo: category).snapshots();
   }
 
+  static getCart(uid){
+    return firestore.collection(cartCollection).where('userId', isEqualTo: uid).snapshots();
+  }
+
+  static deleteDocument(docId){
+    return firestore.collection(cartCollection).doc(docId).delete();
+  }
+
 }
