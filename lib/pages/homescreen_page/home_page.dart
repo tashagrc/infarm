@@ -1,12 +1,15 @@
 import 'package:infarm/constants/constantBuilder.dart';
+import 'package:infarm/controller/product_controller.dart';
 
 import '../category_page/category_details.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
+
   @override
   Widget build(BuildContext context) {
+    var controller = Get.put(ProductController());
     const ads = [
       ads1,
       ads2,
@@ -50,12 +53,7 @@ class HomePage extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(horizontal: 10),
                     child: Align(
                       alignment: Alignment.centerLeft,
-                      child: "Semua Kategori"
-                          .text
-                          .color(appBlue)
-                          .size(20)
-                          .fontFamily(bold)
-                          .make(),
+                      child: "Semua Kategori".text.color(appBlue).size(20).fontFamily(bold).make(),
                     ),
                   ),
                   5.heightBox,
@@ -89,17 +87,13 @@ class HomePage extends StatelessWidget {
                                       .size(20)
                                       .make()),
                             ],
-                          )
-                              .box
-                              .white
-                              .roundedSM
-                              .clip(Clip.antiAlias)
-                              .outerShadowSm
-                              .make()
-                              .onTap(() {
-                            Get.to(() => CategoryDetails(
-                                title: categoryNameList[index]));
-                          });
+                          ).box.white.roundedSM.clip(Clip.antiAlias).outerShadowSm.make().onTap(() {
+                              controller.getSubCategories(categoryNameList[index]);
+                              Get.to(
+                                () => CategoryDetails(title: categoryNameList[index])
+                              );
+                            }
+                          );
                         }),
                   ),
 

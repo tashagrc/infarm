@@ -1,11 +1,16 @@
 import 'package:infarm/constants/constantBuilder.dart';
+import 'package:infarm/controller/product_controller.dart';
 
 class ItemDetails extends StatelessWidget {
   final String? title;
-  const ItemDetails({Key? key, required this.title}) : super(key: key);
+  final dynamic data;
+  const ItemDetails({Key? key, required this.title, this.data}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+
+    var controller = Get.find<ProductController>();
+
     return Scaffold(
       backgroundColor: bgWhite,
       appBar: AppBar(
@@ -28,14 +33,17 @@ class ItemDetails extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+
+                  //PRODUCT IMAGE
                   VxSwiper.builder(
                     autoPlay: true,
                     height: 320,
                     autoPlayInterval: const Duration(seconds: 8),
-                    itemCount: 3,
-                    aspectRatio: 4/4,
+                    itemCount: data['pImages'].length,
+                    aspectRatio: 16/9,
+                    viewportFraction: 1.0,
                     itemBuilder: (context, index) {
-                      return Image.asset(product1, width: double.infinity, fit: BoxFit.cover);
+                      return Image.network(data['pImages'][index], width: double.infinity, fit: BoxFit.contain);
                     }
                   ),
                   10.heightBox,
@@ -43,7 +51,7 @@ class ItemDetails extends StatelessWidget {
                   //PRICE
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 10),
-                    child: "Rp24.000".text.color(appBlue).fontFamily(bold).size(23).make()
+                    child: "${data['pPrice']}".numCurrencyWithLocale(locale: 'id').text.color(appBlue).fontFamily(bold).size(23).make()
                   ),
 
                   3.heightBox,
@@ -51,25 +59,38 @@ class ItemDetails extends StatelessWidget {
                   //TITLE AND DETAIL
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 10),
-                    child: title!.text.size(21).color(appBlue).fontFamily(semiBold).make()
+                    child: "${data['pName']}".text.size(21).color(appBlue).fontFamily(semiBold).make()
                   ),
 
                   //RATING
                   8.heightBox,
-                  Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 10),
-                    width: context.screenWidth,
-                    child: VxRating(
-                      onRatingUpdate: (value) {},
-                      normalColor: grey,
-                      selectionColor: appYellow,
-                      count: 5,
-                      size: 25,
-                      stepInt: true
-                    ),
+                  Row(
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        child: VxRating(
+                          isSelectable: false,
+                          value: double.parse(data['pRating']),
+                          onRatingUpdate: (value) {},
+                          normalColor: grey,
+                          selectionColor: appYellow,
+                          count: 5,
+                          maxRating: 5,
+                          size: 25,
+                        ),
+                      ),
+                      Container( //FOR VERTICAL DIVIDER
+                        color: grey,
+                        height: 21, 
+                        width: 1.2,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        child: "${double.parse(data['pRating'])}".text.fontFamily(semiBold).size(17).make(),
+                      )
+                    ],
                   ),
-
-                  15.heightBox,
+                  const Divider(color: grey, thickness: 0.4, height: 35,),
                   
                   //DESCRIPTION
                   Padding(
@@ -79,7 +100,7 @@ class ItemDetails extends StatelessWidget {
                   5.heightBox,
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 10),
-                    child: "This is a dummy item desc aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa, teriak kack? wkwkwkwkwk biar panjang jadi ini adalah deskripsi".text.color(darkGrey).make(),
+                    child: "${data['pDesc']}".text.color(darkGrey).make(),
                   ),
 
                   15.heightBox,
@@ -92,8 +113,8 @@ class ItemDetails extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           "Toko".text.white.make(),
-                          5.heightBox,
-                          "Nama Toko".text.fontFamily(bold).white.size(16).make()
+                          3.heightBox,
+                          "${data['pSeller']}".text.fontFamily(bold).white.size(16).make()
                         ],
                       ),
                       const CircleAvatar(
@@ -106,43 +127,53 @@ class ItemDetails extends StatelessWidget {
                   5.heightBox,
 
                   //QUANTITY
-                  Row(
-                    children: [
-                      Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 10),
-                        width: 100,
-                        child: "Jumlah".text.color(black).size(18).fontFamily(semiBold).make(),
-                      ),
-                      IconButton(
-                        splashRadius: 20,
-                        onPressed: () {},
-                        icon: const Icon(Icons.remove)
-                      ),
-                      5.widthBox,
-                      "0".text.size(16).color(darkGrey).fontFamily(bold).make(),
-                      5.widthBox,
-                      IconButton(
-                        splashRadius: 20,
-                        onPressed: () {},
-                        icon: const Icon(Icons.add)
-                      ),
-                      10.widthBox,
-                      "(0 stok)".text.color(grey).make(),
-                    ],
+                  Obx(
+                    () => Row(
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 10),
+                          width: 136,
+                          child: "Jumlah".text.color(black).size(18).fontFamily(semiBold).make(),
+                        ),
+                        IconButton(
+                          splashRadius: 20,
+                          onPressed: () {
+                            controller.decrease();
+                            controller.calculateTotalPrice(int.parse(data['pPrice']));
+                          },
+                          icon: const Icon(Icons.remove)
+                        ),
+                        5.widthBox,
+                        controller.quantity.value.text.size(16).color(darkGrey).fontFamily(bold).make(),
+                        5.widthBox,
+                        IconButton(
+                          splashRadius: 20,
+                          onPressed: () {
+                            controller.increase(int.parse(data['pStock']));
+                            controller.calculateTotalPrice(int.parse(data['pPrice']));
+                          },
+                          icon: const Icon(Icons.add)
+                        ),
+                        10.widthBox,
+                        "(${data['pStock']} Stok)".text.color(grey).make(),
+                      ],
+                    ),
                   ),
 
                   //TOTAL PRICE
-                  Row(
-                    children: [
-                      Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 10),
-                        width: 150,
-                        child: "Total Harga".text.color(black).size(18).make(),
-                      ),
-                      "Rp0".text.color(Colors.red).size(18).fontFamily(bold).make(),
-                    ],
+                  Obx(
+                    () =>Row(
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 10),
+                          width: 150,
+                          child: "Total Harga".text.color(black).size(18).make(),
+                        ),
+                        "${controller.totalPrice.value}".numCurrencyWithLocale(locale: 'id').text.color(Colors.red).size(18).fontFamily(bold).make(),
+                      ],
+                    ),
                   ),
-                  const Divider(color: grey, thickness: 1, height: 35,),
+                  const Divider(color: grey, thickness: 0.4, height: 35,),
 
                   //PRODUK YANG MUNGKIN KAMU SUKA
                   Padding(

@@ -7,3 +7,4 @@ FirebaseFirestore firestore = FirebaseFirestore.instance;
 
 //COLLECTIONS OF DATABASE
 const usersCollection = "users";
+const productsCollection = "products";
