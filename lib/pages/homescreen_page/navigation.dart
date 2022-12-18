@@ -24,14 +24,14 @@ class Navigation extends StatelessWidget {
           children: [
             Obx(
               () => Expanded(
-                child: navBody.elementAt(controller.currIndex.value),
+                child: navBody.elementAt(controller.currNavIndex.value),
               ),
             ),
           ],
         ),
         bottomNavigationBar: Obx(
           () => BottomNavigationBar(
-            currentIndex: controller.currIndex.value,
+            currentIndex: controller.currNavIndex.value,
             selectedItemColor: appYellow,
             unselectedItemColor: white,
             selectedLabelStyle:
@@ -50,7 +50,7 @@ class Navigation extends StatelessWidget {
                   label: "Akun"),
             ],
             onTap: (value) {
-              controller.currIndex.value = value;
+              controller.currNavIndex.value = value;
             },
           ),
         ),
