@@ -8,7 +8,7 @@ class HomeController extends GetxController {
     super.onInit();
   }
 
-  var currentNavIndex = 0.obs;
+  var currNavIndex = 0.obs;
   var username = '';
   User? currentUser = auth.currentUser;
 
