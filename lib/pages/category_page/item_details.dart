@@ -49,14 +49,17 @@ class ItemDetails extends StatelessWidget {
 
                       // rating
                       10.heightBox,
-                      VxRating(
-                          onRatingUpdate: (value) {},
-                          normalColor: grey,
-                          selectionColor: appYellow,
-                          maxRating: 5,
-                          count: 5,
-                          size: 25,
-                          stepInt: true),
+                      SizedBox(
+                        width: context.screenWidth,
+                        child: VxRating(
+                            onRatingUpdate: (value) {},
+                            normalColor: grey,
+                            selectionColor: appYellow,
+                            count: 5,
+                            size: 25,
+                            stepInt: true
+                        ),
+                      ),
 
                       10.heightBox,
                       "Rp24.000"
@@ -71,7 +74,7 @@ class ItemDetails extends StatelessWidget {
                       Row(
                         children: [
                           Expanded(
-                              child: Column(
+                            child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
