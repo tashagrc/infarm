@@ -1,4 +1,5 @@
 import 'package:infarm/constants/constantBuilder.dart';
+import 'package:infarm/pages/chat_screen/chat_screen.dart';
 
 class ItemDetails extends StatelessWidget {
   final String? title;
@@ -117,7 +118,9 @@ class ItemDetails extends StatelessWidget {
                       const CircleAvatar(
                         backgroundColor: white,
                         child: Icon(Icons.message_rounded, color: appBlue),
-                      ),
+                      ).onTap(() {
+                        Get.to(() => const ChatScreen());
+                      }),
                     ],
                   )
                       .box
