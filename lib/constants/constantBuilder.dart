@@ -16,6 +16,7 @@ const Color grey = Color(0xffA0A0A0);
 const Color darkGrey = Color(0xff656565);
 const Color appBlue = Color(0xff4D4672);
 const Color appYellow = Color(0xffF9B060);
+const Color black = Color.fromARGB(255, 0, 0, 0);
 
 //STRINGS
 const email = 'Email';
