@@ -1,0 +1,29 @@
+{
+    "categories": [
+        {
+            "name": "Pestisida",
+            "subcategory": [
+                "Insektisida",
+                "Fungisida",
+                "Bakterisida"
+            ]
+        },
+        {
+            "name": "Pupuk",
+            "subcategory": [
+                "Pupuk Kimia",
+                "Pupuk Organik"
+            ]
+        },
+        {
+            "name": "Bibit",
+            "subcategory": [
+                "Bibit Generatif",
+                "Bibit Vegetatif"
+            ]
+        },
+        {
+            "name": "Nutrisi Tanaman"
+        }
+    ]
+}

@@ -34,7 +34,7 @@ class AuthController extends GetxController{
   }
 
   //LOG OUT
-  signOutMethod(context) async{
+  Future signOutMethod(context) async{
     try {
       await auth.signOut();
     } catch (e) {
@@ -44,13 +44,16 @@ class AuthController extends GetxController{
 
   //TO STORE DATA
   storeUserData({name, password, email}) async{
+    User? currentUser = auth.currentUser;
     DocumentReference store = firestore.collection(usersCollection).doc(currentUser!.uid);
     store.set({
       'name': name,
-      'pasword': password,
+      'password': password,
       'email': email,
       'imageUrl': '',
-      'uid': currentUser!.uid,
+      'uid': currentUser.uid,
+      'cartCount': "00",
+      'orderCount': "00"
     });
   }
 
