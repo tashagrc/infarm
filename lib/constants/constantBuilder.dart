@@ -15,6 +15,7 @@ const Color lightGrey = Color.fromARGB(255, 227, 227, 227);
 const Color grey = Color(0xffA0A0A0);
 const Color darkGrey = Color(0xff656565);
 const Color appBlue = Color(0xff4D4672);
+const Color appLightYellow = Color(0xffFFCF9B);
 const Color appYellow = Color(0xffF9B060);
 const Color black = Color.fromARGB(255, 0, 0, 0);
 
@@ -42,6 +43,8 @@ const categoryObat = 'assets/images/category2.png';
 const batikBg = 'assets/images/batik_bg.png';
 const featuredBg = 'assets/images/featured_bg.png';
 const splashBg = 'assets/images/splash.png';
+const categoryEmpty = 'assets/images/category_empty.png';
+const cartEmpty = 'assets/images/cart_empty.png';
 
 //ICON
 const cartIcon = 'assets/icons/cart.png';
