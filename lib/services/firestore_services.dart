@@ -11,14 +11,14 @@ class FirestorServices {
   static getProducts(category) {
     return firestore
         .collection(productsCollection)
-        .where('product_category', isEqualTo: category)
+        .where('pCategory', isEqualTo: category)
         .snapshots();
   }
 
   static getCart(uid) {
     return firestore
         .collection(cartCollection)
-        .where('added_by', isEqualTo: uid)
+        .where('userId', isEqualTo: uid)
         .snapshots();
   }
 

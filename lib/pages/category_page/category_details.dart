@@ -122,4 +122,3 @@ class CategoryDetails extends StatelessWidget {
     );
   }
 }
-

@@ -3,13 +3,14 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:infarm/constants/constantBuilder.dart';
 import 'package:infarm/controller/home_controller.dart';
 
+User? currentUser = auth.currentUser;
 class ChatsController extends GetxController {
   @override
   void onInit() {
     getChatId();
     super.onInit();
   }
-
+  
   var chats = firestore.collection(chatsCollection);
 
   var friendName = Get.arguments[0];

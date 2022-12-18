@@ -26,7 +26,7 @@ class ChatScreen extends StatelessWidget {
               children: [
                 Obx(
                   () => controller.isLoading.value
-                      ? Center(child: loadingIndicator())
+                      ? const Center(child: CircularProgressIndicator(valueColor: AlwaysStoppedAnimation(appBlue),))
                       : Expanded(
                           child: StreamBuilder(
                           stream: FirestorServices.getChatMessages(
@@ -34,9 +34,7 @@ class ChatScreen extends StatelessWidget {
                           builder: (BuildContext context,
                               AsyncSnapshot<QuerySnapshot> snapshot) {
                             if (!snapshot.hasData) {
-                              return Center(
-                                child: loadingIndicator(),
-                              );
+                              return const Center(child: CircularProgressIndicator(valueColor: AlwaysStoppedAnimation(appBlue),));
                             } else if (snapshot.data!.docs.isEmpty) {
                               return Center(
                                 child: "Send a message..."
@@ -48,7 +46,7 @@ class ChatScreen extends StatelessWidget {
                               return ListView(
                                   children: snapshot.data!.docs
                                       .mapIndexed((currentValue, index) {
-                                var data = snapshot.data.docs[index];
+                                var data = snapshot.data!.docs[index];
                                 return Align(
                                     alignment: data['uid'] == currentUser
                                         ? Alignment.centerRight

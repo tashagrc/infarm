@@ -1,8 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:infarm/constants/constantBuilder.dart';
 import 'package:intl/intl.dart' as intl;
 
 Widget senderBubble(DocumentSnapshot data) {
+  User? currentUser = auth.currentUser;
   var timeRaw =
       data['created_on'] == null ? DateTime.now() : data['created_on'].toDate();
   var time = intl.DateFormat("h:mma").format(timeRaw);
@@ -13,9 +15,9 @@ Widget senderBubble(DocumentSnapshot data) {
     child: Container(
         padding: const EdgeInsets.all(8),
         margin: const EdgeInsets.only(bottom: 8),
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
             color: data['uid'] == currentUser!.uid ? lightGrey : grey,
-            borderRadius: BorderRadius.only(
+            borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(20),
               topRight: Radius.circular(20),
               bottomLeft: Radius.circular(20),
