@@ -53,7 +53,6 @@ class ItemDetails extends StatelessWidget {
                           onRatingUpdate: (value) {},
                           normalColor: grey,
                           selectionColor: appYellow,
-                          maxRating: 5,
                           count: 5,
                           size: 25,
                           stepInt: true),
