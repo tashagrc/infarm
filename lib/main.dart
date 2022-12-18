@@ -21,7 +21,7 @@ class _MyAppState extends State<MyApp> {
       title: 'Infarm',
       theme: ThemeData(
         appBarTheme: const AppBarTheme(
-          iconTheme: IconThemeData(color: darkGrey),
+          iconTheme: IconThemeData(color: white),
           backgroundColor: appBlue,
         ),
         scaffoldBackgroundColor: bgWhite,

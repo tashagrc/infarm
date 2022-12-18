@@ -23,7 +23,11 @@
             ]
         },
         {
-            "name": "Nutrisi Tanaman"
+            "name": "Lain lain",
+            "subcategory": [
+                "Bibit Generatif",
+                "Bibit Vegetatif"
+            ]
         }
     ]
 }
