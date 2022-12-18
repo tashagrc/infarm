@@ -29,8 +29,9 @@ class CategoryDetails extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Image.asset(categoryEmpty, width: 300,),
-                  "Kategori ini masih kosong".text.size(25).color(grey).make()
+                  Image.asset(categoryEmpty, width: 180,),
+                  20.heightBox,
+                  "Kategori ini masih kosong".text.size(17).color(grey).make()
                 ],
               ),
             );
