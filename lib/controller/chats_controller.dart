@@ -4,13 +4,14 @@ import 'package:infarm/constants/constantBuilder.dart';
 import 'package:infarm/controller/home_controller.dart';
 
 User? currentUser = auth.currentUser;
+
 class ChatsController extends GetxController {
   @override
   void onInit() {
     getChatId();
     super.onInit();
   }
-  
+
   var chats = firestore.collection(chatsCollection);
 
   var friendName = Get.arguments[0];
@@ -38,7 +39,7 @@ class ChatsController extends GetxController {
               'created_on': null,
               'last_message': '',
               'users': {friendId: null, currentId: null},
-              'toId': friendId,
+              'to_id': friendId,
               'from_id': '',
               'friend_name': friendName,
               'sender_name': senderName
@@ -57,8 +58,8 @@ class ChatsController extends GetxController {
       chats.doc(chatDocId).update({
         'created_on': FieldValue.serverTimestamp(),
         'last_message': message,
-        'told': friendId,
-        'fromId': currentId,
+        'to_id': friendId,
+        'from_id': currentId,
       });
 
       chats.doc(chatDocId).collection(messagesCollection).doc().set({
