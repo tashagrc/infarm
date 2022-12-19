@@ -57,15 +57,27 @@ class ProductController extends GetxController {
     });
   }
 
-  addToWishList(docId) async {
+  addToWishList(docId, context) async {
     await firestore.collection(productsCollection).doc(docId).set({
       'pWishlist': FieldValue.arrayUnion([currentUser!.uid])
     }, SetOptions(merge: true));
+    isFavorite(true);
+    VxToast.show(context, msg: "Tambahkan ke daftar favorit");
   }
 
-  removeFromWishList(docId) async {
+  removeFromWishList(docId, context) async {
     await firestore.collection(productsCollection).doc(docId).set({
       'pWishlist': FieldValue.arrayRemove([currentUser!.uid])
     }, SetOptions(merge: true));
+    isFavorite(false);
+    VxToast.show(context, msg: "Hapus dari daftar favorit");
+  }
+
+  checkFavorite(data) async {
+    if (data['pWishlist'].contains(currentUser!.uid)) {
+      isFavorite(true);
+    } else {
+      isFavorite(false);
+    }
   }
 }
