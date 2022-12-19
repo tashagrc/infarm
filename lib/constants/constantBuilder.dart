@@ -45,6 +45,10 @@ const featuredBg = 'assets/images/featured_bg.png';
 const splashBg = 'assets/images/splash.png';
 const categoryEmpty = 'assets/images/category_empty.png';
 const cartEmpty = 'assets/images/cart_empty.png';
+const bcaPayment = 'assets/images/bca_payment.png';
+// ganti gambar
+const briPayment = 'assets/images/bca_payment.png';
+const cashPayment = 'assets/images/bca_payment.png';
 
 //ICON
 const cartIcon = 'assets/icons/cart.png';
@@ -62,6 +66,7 @@ const semiBold = "OpenSans-SemiBold";
 const bold = "OpenSans-Bold";
 
 //LIST
+const paymentMethodList = [bcaPayment, briPayment, cashPayment];
 
 // CATEGORY
 const categoryNameList = ["Pestisida", "Pupuk", "Bibit", "Lain lain"];
