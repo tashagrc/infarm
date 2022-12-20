@@ -67,6 +67,7 @@ const bold = "OpenSans-Bold";
 
 //LIST
 const paymentMethodList = [bcaPayment, briPayment, cashPayment];
+const paymentMethodNameList = ["BCA", "BRI", "Tunai"];
 
 // CATEGORY
 const categoryNameList = ["Pestisida", "Pupuk", "Bibit", "Lain lain"];

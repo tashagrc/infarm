@@ -10,6 +10,8 @@ class CartController extends GetxController {
   var provinceController = TextEditingController();
   var phoneController = TextEditingController();
 
+  var paymentIndex = 0.obs;
+
   calculate(data) {
     totalPrice.value = 0;
     for (var i = 0; i < data.length; i++) {
