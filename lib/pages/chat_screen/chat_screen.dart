@@ -48,7 +48,7 @@ class ChatScreen extends StatelessWidget {
                                       .mapIndexed((currentValue, index) {
                                 var data = snapshot.data!.docs[index];
                                 return Align(
-                                    alignment: data['uid'] == currentUser
+                                    alignment: data['uid'] == currentUser!.uid
                                         ? Alignment.centerRight
                                         : Alignment.centerLeft,
                                     child: senderBubble(data));

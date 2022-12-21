@@ -9,30 +9,16 @@ class ShippingDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     var controller = Get.find<CartController>();
     return Scaffold(
+      resizeToAvoidBottomInset: false,
         backgroundColor: white,
         appBar: AppBar(
           automaticallyImplyLeading: false,
-          title: "Info Pengiriman"
+          title: "Alamat Penerima"
               .text
               .fontFamily(semiBold)
-              .color(darkGrey)
               .make(),
         ),
-        bottomNavigationBar: SizedBox(
-          height: 60,
-          child: button(
-              onPress: () {
-                // validasi form, bisa diganti2
-                if (controller.streetController.text.length > 5) {
-                  Get.to(() => const PaymentMethods());
-                } else {
-                  VxToast.show(context, msg: "Mohon isi alamat Anda");
-                }
-              },
-              color: appBlue,
-              textColor: white,
-              text: "Berikutnya"),
-        ),
+        
         body: Padding(
           padding: const EdgeInsets.all(12.0),
           child: Column(
@@ -67,6 +53,23 @@ class ShippingDetails extends StatelessWidget {
                   isObscure: false,
                   title: "Kode Pos",
                   controller: controller.postalcodeController),
+              35.heightBox,
+              SizedBox(
+                height: 45,
+                width: context.screenWidth,
+                child: button(
+                    onPress: () {
+                      // validasi form, bisa diganti2
+                      if (controller.streetController.text.length > 5) {
+                        Get.to(() => const PaymentMethods());
+                      } else {
+                        VxToast.show(context, msg: "Mohon isi alamat Anda");
+                      }
+                    },
+                    color: appBlue,
+                    textColor: white,
+                    text: "Berikutnya"),
+              ),
             ],
           ),
         ));

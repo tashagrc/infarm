@@ -4,7 +4,10 @@ import 'package:infarm/constants/constantBuilder.dart';
 import 'package:infarm/controller/auth_controller.dart';
 import 'package:infarm/controller/profile_controller.dart';
 import 'package:infarm/pages/authentication_page/login_page.dart';
+import 'package:infarm/pages/chat_screen/messaging_screen.dart';
+import 'package:infarm/pages/order_page/order_page.dart';
 import 'package:infarm/pages/profile_page/edit_profile_page.dart';
+import 'package:infarm/pages/wishlist_page/wishlist_page.dart';
 import 'package:infarm/services/firestore_services.dart';
 
 class ProfilePage extends StatelessWidget {
@@ -15,9 +18,9 @@ class ProfilePage extends StatelessWidget {
 
     var controller = Get.put(ProfileController());
 
-    const btnList = ["Pesananmu", "Favorit", "Ubah Profile"];
-    const btnIcon = [historyIcon, favIcon, profileIcon];
-    List pageList = [const EditProfilePage(), const EditProfilePage(), const EditProfilePage()];
+    const btnList = ["Pesanan", "Favorit", "Message", "Ubah Profile"];
+    const btnIcon = [historyIcon, favIcon, chatIcon, profileIcon];
+
     User? currentUser = auth.currentUser;
     
     return Scaffold(
@@ -112,13 +115,16 @@ class ProfilePage extends StatelessWidget {
                               leading: Image.asset(btnIcon[index], width: 22, color: appBlue,),
                               title: btnList[index].text.fontFamily(semiBold).make(),
                               onTap: () {
-                                if(index == 2){
+                                if(index == 0){
+                                  Get.to(()=> const OrderPage());
+                                }else if(index == 1){
+                                  Get.to(()=> const WishlistPage());
+                                }else if(index == 2){
+                                  Get.to(()=> const MessagingPage());
+                                }else if(index == 3){
                                   controller.nameController.text = data['name'];
                                   Get.to(() => EditProfilePage(data: data,));
-                                }else{
-                                  Get.to(() => pageList[index]);
                                 }
-                                
                               },
                             );
                           },

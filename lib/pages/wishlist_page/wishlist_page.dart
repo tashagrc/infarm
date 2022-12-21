@@ -2,8 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:infarm/constants/constantBuilder.dart';
 import 'package:infarm/services/firestore_services.dart';
 
-class MessagingPage extends StatelessWidget {
-  const MessagingPage({super.key});
+class WishlistPage extends StatelessWidget {
+  const WishlistPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +12,7 @@ class MessagingPage extends StatelessWidget {
         title: "Pesanan Saya".text.fontFamily(semiBold).make(),
       ),
       body: StreamBuilder(
-        stream: FirestorServices.getAllMessages(),
+        stream: FirestorServices.getWishlist(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot){
           if(!snapshot.hasData){
             return const Center(child: CircularProgressIndicator(valueColor: AlwaysStoppedAnimation(appBlue),),);
@@ -22,11 +22,11 @@ class MessagingPage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Image.asset(
-                    categoryEmpty,
+                    favEmpty,
                     width: 180,
                   ),
                   20.heightBox,
-                  "Pesan masih kosong".text.size(17).color(grey).make()
+                  "Produk Favoritmu masih kosong.".text.size(17).color(grey).make()
                 ],
               ),
             );

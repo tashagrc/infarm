@@ -45,6 +45,7 @@ const featuredBg = 'assets/images/featured_bg.png';
 const splashBg = 'assets/images/splash.png';
 const categoryEmpty = 'assets/images/category_empty.png';
 const cartEmpty = 'assets/images/cart_empty.png';
+const favEmpty = 'assets/images/fav_empty.png';
 const bcaPayment = 'assets/images/bca_payment.png';
 // ganti gambar
 const briPayment = 'assets/images/bca_payment.png';
@@ -55,6 +56,7 @@ const cartIcon = 'assets/icons/cart.png';
 const cartBg = 'assets/icons/cart_empty.png';
 const historyIcon = 'assets/icons/history.png';
 const homeIcon = 'assets/icons/home.png';
+const chatIcon = 'assets/icons/chat.png';
 const profileIcon = 'assets/icons/profile.png';
 const forgetPassIcon = 'asssets/icons/forget_pass.png';
 const profilePic = 'assets/icons/profilePic.png';

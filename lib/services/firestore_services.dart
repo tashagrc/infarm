@@ -1,4 +1,5 @@
 import 'package:infarm/constants/constantBuilder.dart';
+import 'package:infarm/controller/chats_controller.dart';
 
 class FirestorServices {
   static getUser(uid) {
@@ -35,4 +36,17 @@ class FirestorServices {
         .orderBy('created_on', descending: false)
         .snapshots();
   }
+
+  static getAllOrders(){
+    return firestore.collection(ordersCollection).where('order_by', isEqualTo: currentUser!.uid).snapshots();
+  }
+
+  static getWishlist(){
+    return firestore.collection(productsCollection).where('pWishlist', arrayContains: currentUser!.uid).snapshots();
+  }
+
+  static getAllMessages(){
+    return firestore.collection(chatsCollection).where('from_id', isEqualTo: currentUser!.uid).snapshots();
+  }
+
 }
