@@ -37,8 +37,36 @@ class ShippingDetails extends StatelessWidget {
           padding: const EdgeInsets.all(12.0),
           child: Column(
             children: [
-              // customTextField(); 16.10 vid 8
-              // 18.34
+              textField(
+                  hint: "Jalan",
+                  isObscure: false,
+                  title: "Jalan",
+                  controller: controller.streetController),
+              textField(
+                  hint: "Kecamatan",
+                  isObscure: false,
+                  title: "Kecamatan",
+                  controller: controller.kecamatanController),
+              textField(
+                  hint: "Kota",
+                  isObscure: false,
+                  title: "Kota",
+                  controller: controller.cityController),
+              textField(
+                  hint: "Provinsi",
+                  isObscure: false,
+                  title: "Provinsi",
+                  controller: controller.provinceController),
+              textField(
+                  hint: "Nomor Telepon",
+                  isObscure: false,
+                  title: "Nomor Telepon",
+                  controller: controller.phoneController),
+              textField(
+                  hint: "Kode Pos",
+                  isObscure: false,
+                  title: "Kode Pos",
+                  controller: controller.postalcodeController),
             ],
           ),
         ));
