@@ -28,7 +28,7 @@ class ChatScreen extends StatelessWidget {
                   () => controller.isLoading.value
                       ? const Center(child: CircularProgressIndicator(valueColor: AlwaysStoppedAnimation(appBlue),))
                       : Expanded(
-                          child: StreamBuilder(
+                        child: StreamBuilder(
                           stream: FirestorServices.getChatMessages(
                               controller.chatDocId.toString()),
                           builder: (BuildContext context,

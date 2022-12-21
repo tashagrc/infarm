@@ -16,14 +16,14 @@ Widget senderBubble(DocumentSnapshot data) {
         padding: const EdgeInsets.all(8),
         margin: const EdgeInsets.only(bottom: 8),
         decoration: BoxDecoration(
-            color: data['uid'] == currentUser!.uid ? lightGrey : grey,
+            color: data['uid'] == currentUser.uid ? lightGrey : grey,
             borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(20),
               topRight: Radius.circular(20),
               bottomLeft: Radius.circular(20),
             )),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             "${data['message']}".text.white.size(16).make(),
             10.heightBox,
