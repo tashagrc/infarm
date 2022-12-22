@@ -106,7 +106,8 @@ class OrderDetailsPage extends StatelessWidget {
                     orderCardDetails(
                       title1: data['orders'][index]['title'],
                       sub1: "${data['orders'][index]['quantity']}x",
-                      title2: data['orders'][index]['totalPrice']
+                      title2: data['orders'][index]['totalPrice'],
+                      sub2: "Garansi"
                     ),
                   ],
                 );

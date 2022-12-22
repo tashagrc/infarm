@@ -46,6 +46,9 @@ const splashBg = 'assets/images/splash.png';
 const categoryEmpty = 'assets/images/category_empty.png';
 const cartEmpty = 'assets/images/cart_empty.png';
 const favEmpty = 'assets/images/fav_empty.png';
+const onboarding1 = 'assets/images/onboarding1.png';
+const onboarding2 = 'assets/images/onboarding2.png';
+const onboarding3 = 'assets/images/onboarding3.png';
 const bcaPayment = 'assets/images/bca_payment.png';
 // ganti gambar
 const briPayment = 'assets/images/bca_payment.png';
