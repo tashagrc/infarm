@@ -3,6 +3,7 @@ import 'package:infarm/constants/constantBuilder.dart';
 import 'package:infarm/controller/home_controller.dart';
 import 'package:infarm/controller/product_controller.dart';
 import 'package:infarm/pages/category_page/item_details.dart';
+import 'package:infarm/pages/homescreen_page/search_page.dart';
 import 'package:infarm/services/firestore_services.dart';
 
 import '../category_page/category_details.dart';
@@ -12,7 +13,8 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var controller = Get.put(ProductController());
+    var productController = Get.put(ProductController());
+    var searchController = Get.find<HomeController>();
     const ads = [
       ads1,
       ads2,
@@ -28,8 +30,16 @@ class HomePage extends StatelessWidget {
             width: context.screenWidth,
             alignment: Alignment.center,
             child: TextFormField(
-              decoration: const InputDecoration(
-                  prefixIcon: Icon(Icons.search_rounded),
+              controller: searchController.searchController,
+              decoration: InputDecoration(
+                  prefixIcon: const Icon(Icons.search_rounded).onTap(() {
+                    if (searchController
+                        .searchController.text.isNotEmptyAndNotNull) {
+                      Get.to(() => SearchScreen(
+                            title: searchController.searchController.text,
+                          ));
+                    }
+                  }),
                   filled: true,
                   fillColor: white,
                   hintText: "Apa yang ingin Anda beli ?",
@@ -103,7 +113,7 @@ class HomePage extends StatelessWidget {
                               .outerShadowSm
                               .make()
                               .onTap(() {
-                            controller
+                            productController
                                 .getSubCategories(categoryNameList[index]);
                             Get.to(() => CategoryDetails(
                                 title: categoryNameList[index]));
