@@ -1,4 +1,5 @@
 import 'package:infarm/constants/constantBuilder.dart';
+import 'package:infarm/controller/chats_controller.dart';
 import 'package:infarm/controller/product_controller.dart';
 import 'package:infarm/pages/chat_screen/chat_screen.dart';
 
@@ -11,6 +12,7 @@ class ItemDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var controller = Get.find<ProductController>();
+    // var controller1 = Get.put(ChatsController());
 
     return WillPopScope(
       onWillPop: () async {
@@ -176,12 +178,7 @@ class ItemDetails extends StatelessWidget {
                           );
                         }),
                       ],
-                    )
-                        .box
-                        .height(80)
-                        .padding(const EdgeInsets.symmetric(horizontal: 16))
-                        .color(appBlue)
-                        .make(),
+                    ).box.height(80).padding(const EdgeInsets.symmetric(horizontal: 16)).color(appBlue).make(),
 
                     5.heightBox,
 

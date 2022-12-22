@@ -107,19 +107,29 @@ class EditProfilePage extends StatelessWidget {
 
                           //KONDISI JIKA PASSWORD LAMA SAMA DENGAN PASSWORD BARU
                           if(data['password'] == controller.oldPassController.text){
+                            if(controller.newPassController.text != ''){
+                              controller.changeAuthPassword(
+                                email: data['email'],
+                                password: controller.oldPassController.text,
+                                newPassword: controller.newPassController.text
+                              );
 
-                            controller.changeAuthPassword(
-                              email: data['email'],
-                              password: controller.oldPassController.text,
-                              newPassword: controller.newPassController.text
-                            );
-
-                            await controller.updateProfile(
-                              imgUrl: controller.profileImgURL,
-                              name: controller.nameController.text,
-                              password: controller.newPassController.text
-                            );
+                              await controller.updateProfile(
+                                imgUrl: controller.profileImgURL,
+                                name: controller.nameController.text,
+                                password: controller.newPassController.text
+                              );
+                              
+                            }else{
+                              await controller.updateProfile(
+                                imgUrl: controller.profileImgURL,
+                                name: controller.nameController.text,
+                                password: controller.oldPassController.text
+                              );
+                            }
                             VxToast.show(context, msg: "Perubahan berhasil disimpan");
+
+                            
                           }else{
                             VxToast.show(context, msg: "Password salah!");
                             controller.isLoading(false);

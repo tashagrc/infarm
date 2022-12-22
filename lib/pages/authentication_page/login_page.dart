@@ -38,12 +38,12 @@ class LoginPage extends StatelessWidget {
                           alignment: Alignment.centerRight,
                           child: TextButton(
                             onPressed: () {},
-                            child: "Lupa Password?".text.make()),
+                            child: "Lupa Password?".text.make()
+                          ),
                         ),
                         5.heightBox,
                         controller.isLoading.value 
-                          ? const CircularProgressIndicator(
-                            valueColor: AlwaysStoppedAnimation(appBlue),
+                          ? const CircularProgressIndicator(valueColor: AlwaysStoppedAnimation(appBlue),
                           ) 
                           :button(
                             color: appYellow, text: "Masuk", textColor: white, 

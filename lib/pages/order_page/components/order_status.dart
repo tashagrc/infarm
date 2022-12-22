@@ -11,8 +11,8 @@ Widget orderStatus({icon, color, title, isDone}){
         children: [
           "$title".text.color(darkGrey).make(),
           isDone
-          ?const Icon(Icons.thumb_up_rounded, color: appBlue,)
-          : Container()
+            ?const Icon(Icons.done_outline_rounded, color: appBlue,)
+            : Container()
         ],
       ),
     ),

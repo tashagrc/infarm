@@ -44,8 +44,8 @@ class MessagingPage extends StatelessWidget {
                         return Card(
                           child: ListTile(
                             onTap: (){
-                              Get.to(()=> ChatScreen(), 
-                              arguments: [data[index]['pSeller'], data[index]['vendorID']],
+                              Get.to(()=> const ChatScreen(), 
+                              arguments: [data[index]['friend_name'], data[index]['to_id']],
                               );
                               
                             },
