@@ -13,10 +13,10 @@ Widget senderBubble(DocumentSnapshot data) {
     textDirection:
         data['uid'] == currentUser!.uid ? TextDirection.rtl : TextDirection.ltr,
     child: Container(
-        padding: const EdgeInsets.all(8),
+        padding: const EdgeInsets.all(11),
         margin: const EdgeInsets.only(bottom: 8),
         decoration: BoxDecoration(
-            color: data['uid'] == currentUser.uid ? lightGrey : grey,
+            color: data['uid'] == currentUser.uid ? appYellow : appBlue,
             borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(20),
               topRight: Radius.circular(20),

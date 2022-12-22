@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:infarm/constants/constantBuilder.dart';
+import 'package:infarm/controller/chats_controller.dart';
 import 'package:infarm/services/firestore_services.dart';
 
 class WishlistPage extends StatelessWidget {
@@ -9,7 +10,7 @@ class WishlistPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: "Pesanan Saya".text.fontFamily(semiBold).make(),
+        title: "Favorit Saya".text.fontFamily(semiBold).make(),
       ),
       body: StreamBuilder(
         stream: FirestorServices.getWishlist(),
@@ -31,7 +32,44 @@ class WishlistPage extends StatelessWidget {
               ),
             );
           }else{
-            return Container();
+            var data = snapshot.data!.docs;
+            return Column(
+              children: [
+                Expanded(
+                  child: ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: data.length,
+                    itemBuilder: (BuildContext context, int index){
+                      return ListTile(
+                        leading:
+                            Image.network('${data[index]['pImages'][index]}'),
+                        title:
+                            "${data[index]['pName']}"
+                                .richText
+                                .fontFamily(semiBold)
+                                .size(16)
+                                .make(),
+                        subtitle: "${data[index]['pPrice']}"
+                            .numCurrencyWithLocale(locale: 'id')
+                            .text
+                            .color(appBlue)
+                            .fontFamily(bold)
+                            .size(16)
+                            .make(),
+                        trailing: const Icon(
+                          Icons.favorite,
+                          color: Colors.red,
+                        ).onTap(() async {
+                          await firestore.collection(productsCollection).doc(data[index].id).set({
+                            'pWishlist': FieldValue.arrayRemove([currentUser!.uid])
+                          }, SetOptions(merge: true));
+                        }),
+                      );
+                    }
+                  ),
+                ),
+              ],
+            );
           }
         },
       ),

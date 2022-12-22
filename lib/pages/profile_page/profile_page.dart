@@ -4,7 +4,7 @@ import 'package:infarm/constants/constantBuilder.dart';
 import 'package:infarm/controller/auth_controller.dart';
 import 'package:infarm/controller/profile_controller.dart';
 import 'package:infarm/pages/authentication_page/login_page.dart';
-import 'package:infarm/pages/chat_screen/messaging_screen.dart';
+import 'package:infarm/pages/chat_screen/messaging_page.dart';
 import 'package:infarm/pages/order_page/order_page.dart';
 import 'package:infarm/pages/profile_page/edit_profile_page.dart';
 import 'package:infarm/pages/wishlist_page/wishlist_page.dart';
@@ -17,6 +17,7 @@ class ProfilePage extends StatelessWidget {
   Widget build(BuildContext context) {
 
     var controller = Get.put(ProfileController());
+   
 
     const btnList = ["Pesanan", "Favorit", "Message", "Ubah Profile"];
     const btnIcon = [historyIcon, favIcon, chatIcon, profileIcon];
@@ -79,29 +80,62 @@ class ProfilePage extends StatelessWidget {
                         ),
 
                         5.heightBox,
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                "${data['cartCount']}".text.fontFamily(bold).color(darkGrey).size(16).make(),
-                                5.heightBox,
-                                "Item di keranjang".text.color(darkGrey).align(TextAlign.center).make(),
-                              ],
-                            ).box.white.roundedSM.width(context.screenWidth/2.2).height(75).padding(const EdgeInsets.all(4)).make(),
-                            
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                "${data['orderCount']}".text.fontFamily(bold).color(darkGrey).size(16).make(),
-                                5.heightBox,
-                                "Total transaksi".text.color(darkGrey).make(),
-                              ],
-                            ).box.white.roundedSM.width(context.screenWidth/2.2).height(75).padding(const EdgeInsets.all(4)).make(),
-                          
-                          ],
+
+                        FutureBuilder(
+                          future: FirestorServices.getCounts(),
+                          builder: (BuildContext context, AsyncSnapshot snapshot){
+                            if(!snapshot.hasData){
+                              return const Center(child: CircularProgressIndicator(valueColor: AlwaysStoppedAnimation(appBlue),),);
+                            }else {
+                              var count = snapshot.data;
+                              return Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      "${count[0]}".text.fontFamily(bold).color(darkGrey).size(16).make(),
+                                      5.heightBox,
+                                      "Item di keranjang".text.color(darkGrey).align(TextAlign.center).make(),
+                                    ],
+                                  ).box.white.roundedSM.width(context.screenWidth/2.2).height(75).padding(const EdgeInsets.all(4)).make(),
+                                  
+                                  Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      "${count[1]}".text.fontFamily(bold).color(darkGrey).size(16).make(),
+                                      5.heightBox,
+                                      "Total transaksi".text.color(darkGrey).make(),
+                                    ],
+                                  ).box.white.roundedSM.width(context.screenWidth/2.2).height(75).padding(const EdgeInsets.all(4)).make(),
+                                ],
+                              );
+                            }
+                          }
                         ),
+                        // Row(
+                        //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        //   children: [
+                        //     Column(
+                        //       mainAxisAlignment: MainAxisAlignment.center,
+                        //       children: [
+                        //         "${data['cartCount']}".text.fontFamily(bold).color(darkGrey).size(16).make(),
+                        //         5.heightBox,
+                        //         "Item di keranjang".text.color(darkGrey).align(TextAlign.center).make(),
+                        //       ],
+                        //     ).box.white.roundedSM.width(context.screenWidth/2.2).height(75).padding(const EdgeInsets.all(4)).make(),
+                            
+                        //     Column(
+                        //       mainAxisAlignment: MainAxisAlignment.center,
+                        //       children: [
+                        //         "${data['orderCount']}".text.fontFamily(bold).color(darkGrey).size(16).make(),
+                        //         5.heightBox,
+                        //         "Total transaksi".text.color(darkGrey).make(),
+                        //       ],
+                        //     ).box.white.roundedSM.width(context.screenWidth/2.2).height(75).padding(const EdgeInsets.all(4)).make(),
+                          
+                        //   ],
+                        // ),
                         25.heightBox,
                         ListView.separated(
                           physics: const NeverScrollableScrollPhysics(),

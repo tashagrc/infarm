@@ -1,5 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:infarm/constants/constantBuilder.dart';
+import 'package:infarm/controller/home_controller.dart';
 import 'package:infarm/controller/product_controller.dart';
+import 'package:infarm/pages/category_page/item_details.dart';
+import 'package:infarm/services/firestore_services.dart';
 
 import '../category_page/category_details.dart';
 
@@ -117,37 +121,51 @@ class HomePage extends StatelessWidget {
                         SingleChildScrollView(
                           physics: const BouncingScrollPhysics(),
                           scrollDirection: Axis.horizontal,
-                          child: Row(
-                            children: List.generate(
-                              6,
-                              (index) => Column(
-                                crossAxisAlignment:
-                                    CrossAxisAlignment.start,
-                                children: [
-                                  ClipRRect(
-                                    borderRadius: const BorderRadius.only(
-                                        topLeft: Radius.circular(7),
-                                        topRight: Radius.circular(7)),
-                                    child: Image.asset(
-                                      product1,
-                                      width: 150,
-                                      fit: BoxFit.cover,
-                                    ),
+                          child: FutureBuilder(
+                            future: FirestorServices.getFeaturedProducts(),
+                            builder: (context, AsyncSnapshot<QuerySnapshot> featuredsnapshot){
+                              if(!featuredsnapshot.hasData){
+                                return const Center(child: CircularProgressIndicator(valueColor: AlwaysStoppedAnimation(appBlue),),);
+                              }else{
+                                var featuredData = featuredsnapshot.data!.docs;
+                                return Row(
+                                  children: List.generate(
+                                    featuredData.length,
+                                    (index) => Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        ClipRRect(
+                                          borderRadius: const BorderRadius.only(
+                                              topLeft: Radius.circular(7),
+                                              topRight: Radius.circular(7)),
+                                          child: Image.network(
+                                            featuredData[index]['pImages'][0],
+                                            width: 150,
+                                            height: 150,
+                                            fit: BoxFit.cover,
+                                          ),
+                                        ),
+                                        10.heightBox,
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(horizontal: 8),
+                                          child: "${featuredData[index]['pName']}".text.fontFamily(semiBold).color(darkGrey).make(),
+                                        ),
+                                        7.heightBox,
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(horizontal: 8),
+                                          child: "${featuredData[index]['pPrice']}".numCurrencyWithLocale(locale: 'id').text.fontFamily(bold).color(appYellow).size(16).make(),
+                                        ),
+                                        7.heightBox
+                                      ],
+                                    ).box.white.roundedSM.margin(const EdgeInsets.symmetric(horizontal: 4)).make().onTap(() {
+                                        Get.to(()=> ItemDetails(title: "${featuredData[index]['pName']}", data: featuredData[index],));
+                                      }
+                                    )
                                   ),
-                                  10.heightBox,
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(horizontal: 8),
-                                    child: "Pestisida Pesnab".text.fontFamily(semiBold).color(darkGrey).make(),
-                                  ),
-                                  7.heightBox,
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(horizontal: 8),
-                                    child: "Rp24.000".text.fontFamily(bold).color(appYellow).size(16).make(),
-                                  ),
-                                  7.heightBox
-                                ],
-                              ).box.white.roundedSM.margin(const EdgeInsets.symmetric(horizontal: 4)).make()
-                            ),
+                                );
+                              }
+                            }
                           ),
                         ),
                       ],
@@ -168,42 +186,55 @@ class HomePage extends StatelessWidget {
                         .make(),
                     ),
                   ),
-                  GridView.builder(
-                    padding: const EdgeInsets.all(5),
-                    physics: const NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    itemCount: 6,
-                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      mainAxisSpacing: 8,
-                      crossAxisSpacing: 1,
-                      mainAxisExtent: 270
-                    ),
-                    itemBuilder: (context, index) {
-                      return Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          ClipRRect(
-                            borderRadius: const BorderRadius.only(
-                                topLeft: Radius.circular(8),
-                                topRight: Radius.circular(8)
-                            ),
-                            child: Image.asset(product1, width: 200, height: 170, fit: BoxFit.cover)
+                  StreamBuilder(
+                    stream: FirestorServices.allProducts(),
+                    builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot){
+                      if(!snapshot.hasData){
+                        return const Center(child: CircularProgressIndicator(valueColor: AlwaysStoppedAnimation(appBlue),),);
+                      }else{
+                        var allProductsData = snapshot.data!.docs;
+                        return GridView.builder(
+                          padding: const EdgeInsets.all(5),
+                          physics: const NeverScrollableScrollPhysics(),
+                          shrinkWrap: true,
+                          itemCount: allProductsData.length,
+                          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
+                            mainAxisSpacing: 8,
+                            crossAxisSpacing: 1,
+                            mainAxisExtent: 270
                           ),
-                          const Spacer(),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 8),
-                            child: "Pestisida Pesnab".text.fontFamily(semiBold).color(darkGrey).make(),
-                          ),
-                          10.heightBox,
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 8),
-                            child: "Rp24.000" .text.fontFamily(bold).color(appYellow).size(16).make(),
-                          ),
-                          10.heightBox,
-                        ],
-                      ).box.white.margin(const EdgeInsets.symmetric(horizontal: 4)).roundedSM.make();
-                    },
+                          itemBuilder: (context, index) {
+                            return Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                ClipRRect(
+                                  borderRadius: const BorderRadius.only(
+                                      topLeft: Radius.circular(8),
+                                      topRight: Radius.circular(8)
+                                  ),
+                                  child: Image.network(allProductsData[index]['pImages'][0], width: 200, height: 170, fit: BoxFit.cover)
+                                ),
+                                const Spacer(),
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                                  child: "${allProductsData[index]['pName']}".text.fontFamily(semiBold).color(darkGrey).make(),
+                                ),
+                                10.heightBox,
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                                  child: "${allProductsData[index]['pPrice']}".numCurrencyWithLocale(locale: 'id').text.fontFamily(bold).color(appYellow).size(16).make(),
+                                ),
+                                10.heightBox,
+                              ],
+                            ).box.white.margin(const EdgeInsets.symmetric(horizontal: 4, vertical: 10)).roundedSM.make().onTap(() {
+                                Get.to(()=> ItemDetails(title: "${allProductsData[index]['pName']}", data: allProductsData[index],));
+                              }
+                            );
+                          },
+                        );
+                      }
+                    }
                   ),
                 ],
               ),

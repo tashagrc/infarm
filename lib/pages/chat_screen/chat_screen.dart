@@ -17,7 +17,6 @@ class ChatScreen extends StatelessWidget {
           title: "${controller.friendName}"
               .text
               .fontFamily(semiBold)
-              .color(darkGrey)
               .make(),
         ),
         body: Padding(
