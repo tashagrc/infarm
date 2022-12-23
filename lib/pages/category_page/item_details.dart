@@ -10,7 +10,7 @@ class ItemDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var controller = Get.find<ProductController>();
+    var controller = Get.put(ProductController());
 
     return WillPopScope(
       onWillPop: () async {
@@ -328,18 +328,20 @@ class ItemDetails extends StatelessWidget {
                 child: button(
                     color: appYellow,
                     onPress: () {
-                      if(controller.quantity.value > 0){
+                      if (controller.quantity.value > 0) {
                         controller.addToCart(
-                          title: data['pName'],
-                          img: data['pImages'][0],
-                          sellerName: data['pSeller'],
-                          vendorID: data['vendorID'],
-                          quantity: controller.quantity.value,
-                          totalPrice: controller.totalPrice.value,
-                          context: context);
-                        VxToast.show(context, msg: "Berhasil menambah ke keranjang");
-                      }else{
-                        VxToast.show(context, msg: "Kamu belum menambahkan jumlah produk");
+                            title: data['pName'],
+                            img: data['pImages'][0],
+                            sellerName: data['pSeller'],
+                            vendorID: data['vendorID'],
+                            quantity: controller.quantity.value,
+                            totalPrice: controller.totalPrice.value,
+                            context: context);
+                        VxToast.show(context,
+                            msg: "Berhasil menambah ke keranjang");
+                      } else {
+                        VxToast.show(context,
+                            msg: "Kamu belum menambahkan jumlah produk");
                       }
                     },
                     textColor: white,

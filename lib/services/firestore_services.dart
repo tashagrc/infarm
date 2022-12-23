@@ -37,40 +37,66 @@ class FirestorServices {
         .snapshots();
   }
 
-  static getAllOrders(){
-    return firestore.collection(ordersCollection).where('order_by', isEqualTo: currentUser!.uid).snapshots();
+  static getAllOrders() {
+    return firestore
+        .collection(ordersCollection)
+        .where('order_by', isEqualTo: currentUser!.uid)
+        .snapshots();
   }
 
-  static getWishlist(){
-    return firestore.collection(productsCollection).where('pWishlist', arrayContains: currentUser!.uid).snapshots();
+  static getWishlist() {
+    return firestore
+        .collection(productsCollection)
+        .where('pWishlist', arrayContains: currentUser!.uid)
+        .snapshots();
   }
- 
-  static getAllMessages(){
-    return firestore.collection(chatsCollection).where('from_id', isEqualTo: currentUser!.uid).snapshots();
-  }  
 
-  static getCounts() async{
+  static getAllMessages() {
+    return firestore
+        .collection(chatsCollection)
+        .where('from_id', isEqualTo: currentUser!.uid)
+        .snapshots();
+  }
+
+  static getCounts() async {
     var res = await Future.wait([
-      firestore.collection(cartCollection).where('added_by', isEqualTo: currentUser!.uid).get().then((value){
+      firestore
+          .collection(cartCollection)
+          .where('added_by', isEqualTo: currentUser!.uid)
+          .get()
+          .then((value) {
         return value.docs.length;
       }),
-
-      firestore.collection(ordersCollection).where('order_by', isEqualTo: currentUser!.uid).get().then((value){
+      firestore
+          .collection(ordersCollection)
+          .where('order_by', isEqualTo: currentUser!.uid)
+          .get()
+          .then((value) {
         return value.docs.length;
       }),
-
-      
     ]);
     return res;
   }
 
-  static allProducts(){
+  static allProducts() {
     return firestore.collection(productsCollection).snapshots();
   }
 
-  static getFeaturedProducts(){
-    return firestore.collection(productsCollection).where('isFeatured', isEqualTo: true).get();
+  static getFeaturedProducts() {
+    return firestore
+        .collection(productsCollection)
+        .where('isFeatured', isEqualTo: true)
+        .get();
   }
 
+  static searchProducts(title) {
+    return firestore.collection(productsCollection).get();
+  }
 
+  static getSubCategoryProduct(title) {
+    return firestore
+        .collection(productsCollection)
+        .where('pSubCategory', isEqualTo: title)
+        .snapshots();
+  }
 }
