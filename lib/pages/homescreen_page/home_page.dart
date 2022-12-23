@@ -183,7 +183,7 @@ class _HomePageState extends State<HomePage> {
                                               },
                                               placeholder: imageLoading,
                                               image: featuredData[index]['pImages'][0],
-                                              width: 150,
+                                              width: 170,
                                               height: 150,
                                               fit: BoxFit.cover,
                                             ),
@@ -211,7 +211,7 @@ class _HomePageState extends State<HomePage> {
                                           ),
                                           7.heightBox
                                         ],
-                                      ).box.white.roundedSM.margin(const EdgeInsets.symmetric(horizontal: 4)).make().onTap(() {
+                                      ).box.white.roundedSM.width(170).height(220).margin(const EdgeInsets.symmetric(horizontal: 4)).make().onTap(() {
                                           Get.to(() => ItemDetails(title:"${featuredData[index]['pName']}",data: featuredData[index],));
                                         }
                                       )
