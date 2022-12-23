@@ -2,9 +2,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:infarm/constants/constantBuilder.dart';
 import 'package:infarm/pages/order_page/order_details_page.dart';
 import 'package:infarm/services/firestore_services.dart';
+import 'package:intl/intl.dart'  as intl;
+import 'package:intl/date_symbol_data_local.dart';
 
 class OrderPage extends StatelessWidget {
   const OrderPage({super.key});
+  
 
   @override
   Widget build(BuildContext context) {
@@ -36,16 +39,42 @@ class OrderPage extends StatelessWidget {
             return ListView.builder(
               itemCount: data.length,
               itemBuilder: (BuildContext context, int index){
-                return ListTile(
-                  leading: "${index+1}".text.fontFamily(bold).color(darkGrey).xl.make(),
-                  trailing: IconButton(
-                    onPressed: (){
-                      Get.to(()=> OrderDetailsPage(data: data[index]));
-                    },
-                    icon: const Icon(Icons.arrow_forward_ios_rounded, color: appBlue,),
+                return Padding(
+                  padding: const EdgeInsets.all(15),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      "${index+1}".text.fontFamily(bold).color(darkGrey).xl.make(),
+
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            "Order ID: ${data[index].id}".toString().text.color(appBlue).fontFamily(semiBold).make(),
+                            Text(
+                              intl.NumberFormat.currency(
+                                locale: 'id',
+                                symbol: 'Rp ',
+                                decimalDigits: 2,
+                              ).format(data[index]['total_amount']),
+                              style: const TextStyle(
+                                fontFamily: bold,
+                                fontSize: 16,
+                                color: appBlue
+                              ),
+                            ),
+                            "Tanggal: ${intl.DateFormat.yMd().add_jm().format((data[index]['order_date'].toDate()))}".text.make()
+                          ],
+                      ),
+
+                      IconButton(
+                        onPressed: (){
+                          Get.to(()=> OrderDetailsPage(data: data[index]));
+                        },
+                        icon: const Icon(Icons.arrow_forward_ios_rounded, color: appBlue,),
+                      ),
+
+                    ],
                   ),
-                  title: data[index].id.toString().text.color(appBlue).fontFamily(semiBold).make(),
-                  subtitle: data[index]['total_amount'].toString().numCurrencyWithLocale(locale: 'id').text.color(darkGrey).fontFamily(bold).make(),
                 );
               },
             );

@@ -4,6 +4,7 @@ import 'package:infarm/controller/product_controller.dart';
 import 'package:infarm/pages/category_page/item_details.dart';
 import 'package:infarm/services/firestore_services.dart';
 
+
 class CategoryDetails extends StatefulWidget {
   final String? title;
   const CategoryDetails({Key? key, required this.title}) : super(key: key);
@@ -14,6 +15,8 @@ class CategoryDetails extends StatefulWidget {
 
 class _CategoryDetailsState extends State<CategoryDetails> {
   @override
+
+
   void initState() {
     super.initState();
     switchCategory(widget.title);
@@ -29,6 +32,7 @@ class _CategoryDetailsState extends State<CategoryDetails> {
 
   var controller = Get.find<ProductController>();
   dynamic productMethod;
+  String currentTitle = '';
 
   @override
   Widget build(BuildContext context) {
@@ -41,30 +45,52 @@ class _CategoryDetailsState extends State<CategoryDetails> {
         children: [
           // SUBKATEGORI ATAS
           SingleChildScrollView(
+            padding: EdgeInsets.symmetric(vertical: 15,),
             physics: const BouncingScrollPhysics(),
             scrollDirection: Axis.horizontal,
             child: Row(
               children: List.generate(
                   controller.subcat.length,
-                  (index) => "${controller.subcat[index]}"
-                          .text
-                          .size(12)
-                          .fontFamily(semiBold)
-                          .color(darkGrey)
-                          .makeCentered()
-                          .box
-                          .white
-                          .roundedSM
-                          .size(150, 60)
-                          .margin(const EdgeInsets.symmetric(horizontal: 4))
-                          .make()
-                          .onTap(() {
-                        switchCategory("${controller.subcat[index]}");
-                        setState(() {});
-                      })),
+                  (index) => controller.subcat[index] == currentTitle
+                  ?"${controller.subcat[index]}"
+                    .text
+                    .size(12)
+                    .fontFamily(semiBold)
+                    .color(appBlue)
+                    .makeCentered()
+                    .box
+                    .color(appLightYellow)
+                    .roundedSM
+                    .size(150, 60)
+                    .margin(const EdgeInsets.symmetric(horizontal: 4, vertical: 0))
+                    .make()
+                    .onTap(() {
+                      
+                      switchCategory("${controller.subcat[index]}");
+                      setState(() {});
+                    })
+                  :"${controller.subcat[index]}"
+                    .text
+                    .size(12)
+                    .fontFamily(semiBold)
+                    .color(darkGrey)
+                    .makeCentered()
+                    .box
+                    .white
+                    .roundedSM
+                    .size(150, 60)
+                    .margin(const EdgeInsets.symmetric(horizontal: 4))
+                    .make()
+                    .onTap(() {
+                      currentTitle = controller.subcat[index];
+                      switchCategory("${controller.subcat[index]}");
+                      setState(() {});
+                    })
+                  
+              ),
             ),
           ),
-          20.heightBox,
+          0.heightBox,
           StreamBuilder(
               stream: productMethod,
               builder: (BuildContext context,

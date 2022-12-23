@@ -20,19 +20,19 @@ class OrderDetailsPage extends StatelessWidget {
         child: Column(
           children: [
             orderStatus(
-              color: appBlue, icon: Icons.history_edu, title: "Pesanan Dibuat", isDone: data['order_placed']
+              color: appBlue, icon: Icons.history_edu, title: "Pesanan Dibuat", isDone: data['order_placed'], context: context
             ),
             orderStatus(
-              color: Colors.blue, icon: Icons.thumb_up, title: "Siap Dikirim", isDone: data['order_confirmed']
+              color: Colors.blue, icon: Icons.thumb_up, title: "Siap Dikirim", isDone: data['order_confirmed'], context: context
             ),
             orderStatus(
-              color: Colors.purple, icon: Icons.fire_truck_rounded, title: "Dikirim", isDone: data['order_on_delivery']
+              color: Colors.purple, icon: Icons.fire_truck_rounded, title: "Dikirim", isDone: data['order_on_delivery'], context: context
             ),
             orderStatus(
-              color: appYellow, icon: Icons.card_giftcard_rounded, title: "Sampai", isDone: data['order_delivered']
+              color: appYellow, icon: Icons.card_giftcard_rounded, title: "Sampai", isDone: data['order_delivered'], context: context
             ),
       
-            const Divider(),
+            const Divider(thickness: 5,),
             10.heightBox,
             Column(
               children: [
@@ -54,36 +54,18 @@ class OrderDetailsPage extends StatelessWidget {
                   title2: "Status Pengiriman",
                   sub2: "Pesanan Dibuat"
                 ),
+                const Divider(thickness: 5,),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          'Alamat Penerima'.text.fontFamily(semiBold).make(),
-                          '${data['order_by_name']}'.text.make(),
-                          '${data['order_by_email']}'.text.make(),
-                          '${data['order_by_street']}'.text.make(),
-                          '${data['order_by_city']}'.text.make(),
-                          '${data['order_by_province']}'.text.make(),
-                          '${data['order_by_phone']}'.text.make(),
-                          '${data['order_by_postalcode']}'.text.make(),
-                        ],
-                      ),
-      
-                      SizedBox(
-                        width: 150,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            "Total Harga".text.fontFamily(semiBold).make(),
-                            "${data['total_amount']}".numCurrencyWithLocale(locale: 'id').text.color(appBlue).fontFamily(bold).make()
-                          ],
-                        ),
-                      )
+                      'Alamat Penerima'.text.fontFamily(semiBold).size(16).makeCentered(),
+                      6.heightBox,
+                      'Nama\t\t\t\t\t: ${data['order_by_name']}'.text.make(),
+                      'Email\t\t\t\t\t\t: ${data['order_by_email']}'.text.make(),
+                      'Alamat\t\t\t: ${data['order_by_street']}, ${data['order_by_kecamatan']}, ${data['order_by_city']}, ${data['order_by_province']}, ${data['order_by_postalcode']}'.text.make(),
+                      'Telepon\t: ${data['order_by_phone']}'.text.make(),
                     ],
                   ),
                 )
@@ -103,11 +85,10 @@ class OrderDetailsPage extends StatelessWidget {
               children: List.generate(data['orders'].length, (index) {
                 return Column(
                   children: [
-                    orderCardDetails(
+                    orderCardDetailsPrice(
                       title1: data['orders'][index]['title'],
                       sub1: "${data['orders'][index]['quantity']}x",
                       title2: data['orders'][index]['totalPrice'],
-                      sub2: "Garansi"
                     ),
                   ],
                 );
@@ -115,11 +96,21 @@ class OrderDetailsPage extends StatelessWidget {
             ).box.white.margin(const EdgeInsets.only(bottom: 4)).outerShadowMd.make(),
             10.heightBox,
 
-            Row(
+            Column(
               children: [
-                "Harga: ".text.size(16).fontFamily(semiBold).color(darkGrey).make()
+                "Total Harga".text.size(20).fontFamily(bold).color(appYellow).makeCentered(),
+                15.heightBox,
+                totalPrice(title: "Sub Total", sub: data['total_amount'], context: context),
+                totalPrice(title: "Ongkos Kirim", sub: 9000, context: context),
+                totalPrice(title: "Pajak", sub: 0, context: context),
+                totalPrice(title: "Biaya Admin", sub: 2500, context: context),
+                7.heightBox,
+                Divider(thickness: 2, color: Colors.white, indent: context.screenWidth*0.6),
+                5.heightBox,
+                grandTotal(title: "Grand Total", sub: data['total_amount'] + 9000 + 2500, context: context),
+
               ],
-            )
+            ).box.color(appBlue).padding(const EdgeInsets.symmetric(horizontal: 15, vertical: 15)).make(),
 
           ],
         ),

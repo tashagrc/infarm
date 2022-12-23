@@ -24,26 +24,28 @@ class HomePage extends StatelessWidget {
       body: Column(
         children: [
           Container(
-            padding:
-                const EdgeInsets.only(right: 10, left: 10, top: 45, bottom: 10),
+            padding:const EdgeInsets.only(right: 10, left: 10, top: 45, bottom: 10),
             decoration: const BoxDecoration(color: appBlue),
             width: context.screenWidth,
             alignment: Alignment.center,
             child: TextFormField(
+              
               controller: searchController.searchController,
+              onEditingComplete: () => Get.to(() => SearchScreen(title: searchController.searchController.text,)),
               decoration: InputDecoration(
-                  prefixIcon: const Icon(Icons.search_rounded).onTap(() {
-                    if (searchController
-                        .searchController.text.isNotEmptyAndNotNull) {
-                      Get.to(() => SearchScreen(
-                            title: searchController.searchController.text,
-                          ));
-                    }
-                  }),
-                  filled: true,
-                  fillColor: white,
-                  hintText: "Apa yang ingin Anda beli ?",
-                  hintStyle: TextStyle(color: grey)),
+                prefixIcon: const Icon(Icons.search_rounded).onTap(() {
+                  if (searchController.searchController.text.isNotEmptyAndNotNull) {
+                    Get.to(() => SearchScreen(
+                        title: searchController.searchController.text,
+                      )
+                    );
+                  }
+                }),
+                filled: true,
+                fillColor: white,
+                hintText: "Apa yang ingin Anda beli ?",
+                hintStyle: const TextStyle(color: grey)
+              ),
             ),
           ),
           Expanded(

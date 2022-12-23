@@ -1,6 +1,5 @@
 import 'package:infarm/constants/constantBuilder.dart';
 import 'package:infarm/pages/onboarding_page/onboarding_page.dart';
-import 'package:infarm/pages/splash_screen.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 void main() async {

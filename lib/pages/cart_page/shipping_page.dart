@@ -10,68 +10,83 @@ class ShippingDetails extends StatelessWidget {
     var controller = Get.find<CartController>();
     return Scaffold(
       resizeToAvoidBottomInset: false,
-        backgroundColor: white,
-        appBar: AppBar(
-          automaticallyImplyLeading: false,
-          title: "Alamat Penerima"
-              .text
-              .fontFamily(semiBold)
-              .make(),
-        ),
+      backgroundColor: white,
+      appBar: AppBar(
+        title: "Alamat Penerima"
+            .text
+            .fontFamily(semiBold)
+            .make(),
+      ),
         
-        body: Padding(
-          padding: const EdgeInsets.all(12.0),
-          child: Column(
-            children: [
-              textField(
-                  hint: "Jalan",
-                  isObscure: false,
-                  title: "Jalan",
-                  controller: controller.streetController),
-              textField(
-                  hint: "Kecamatan",
-                  isObscure: false,
-                  title: "Kecamatan",
-                  controller: controller.kecamatanController),
-              textField(
-                  hint: "Kota",
-                  isObscure: false,
-                  title: "Kota",
-                  controller: controller.cityController),
-              textField(
-                  hint: "Provinsi",
-                  isObscure: false,
-                  title: "Provinsi",
-                  controller: controller.provinceController),
-              textField(
-                  hint: "Nomor Telepon",
-                  isObscure: false,
-                  title: "Nomor Telepon",
-                  controller: controller.phoneController),
-              textField(
-                  hint: "Kode Pos",
-                  isObscure: false,
-                  title: "Kode Pos",
-                  controller: controller.postalcodeController),
-              35.heightBox,
-              SizedBox(
-                height: 45,
-                width: context.screenWidth,
-                child: button(
-                    onPress: () {
-                      // validasi form, bisa diganti2
-                      if (controller.streetController.text.length > 3) {
-                        Get.to(() => const PaymentMethods());
-                      } else {
-                        VxToast.show(context, msg: "Alamat harus lebih dari 3 karakter!", showTime: 4000, bgColor: Colors.red[400], textColor: white);
-                      }
-                    },
-                    color: appBlue,
-                    textColor: white,
-                    text: "Berikutnya"),
+      body: SingleChildScrollView(
+        physics: const NeverScrollableScrollPhysics(),
+        padding: const EdgeInsets.all(15),
+        child: Column(
+          children: [
+            15.heightBox,
+            textField(
+                hint: "Alamat",
+                isObscure: false,
+                title: "Alamat",
+                controller: controller.streetController),
+            10.heightBox,
+            textField(
+                hint: "Kecamatan",
+                isObscure: false,
+                title: "Kecamatan",
+                controller: controller.kecamatanController),
+            10.heightBox,
+            textField(
+                hint: "Kota",
+                isObscure: false,
+                title: "Kota",
+                controller: controller.cityController),
+            10.heightBox,
+            textField(
+                hint: "Provinsi",
+                isObscure: false,
+                title: "Provinsi",
+                controller: controller.provinceController),
+            10.heightBox,
+            textField(
+                hint: "Nomor Telepon",
+                isObscure: false,
+                title: "Nomor Telepon",
+                controller: controller.phoneController),
+            10.heightBox,
+            textField(
+                hint: "Kode Pos",
+                isObscure: false,
+                title: "Kode Pos",
+                controller: controller.postalcodeController),
+            35.heightBox,
+            SizedBox(
+              height: 45,
+              width: context.screenWidth,
+              child: button(
+                onPress: () {
+                  String pattern = r'^[0-9]+';
+                  RegExp regex = RegExp(pattern);
+                  // VALIDASI FORM
+                  if (!(controller.streetController.text.length > 5)) {
+                    VxToast.show(context, msg: "Alamat harus lebih dari 5 karakter!", showTime: 4000, bgColor: Colors.red[400], textColor: white);
+                  }else if(!regex.hasMatch(controller.phoneController.text) || !(controller.phoneController.text.length > 8)){
+                    VxToast.show(context, msg: "Masukkan nomor telepon yang valid!", showTime: 4000, bgColor: Colors.red[400], textColor: white);
+                  }else if(!regex.hasMatch(controller.postalcodeController.text)){
+                    VxToast.show(context, msg: "Masukkan kode pos yang valid!", showTime: 4000, bgColor: Colors.red[400], textColor: white);
+                  }
+                  else {
+                    Get.to(() => const PaymentMethods());
+                  }
+                },
+                color: appBlue,
+                textColor: white,
+                text: "Berikutnya"
               ),
-            ],
-          ),
-        ));
+            ),
+          ],
+        ),
+      )
+    );
   }
 }

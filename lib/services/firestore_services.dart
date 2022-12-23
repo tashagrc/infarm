@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:infarm/constants/constantBuilder.dart';
 
@@ -43,6 +42,7 @@ class FirestorServices {
     return firestore
         .collection(ordersCollection)
         .where('order_by', isEqualTo: currentUserCurr!.uid)
+        .orderBy('order_date', descending: true)
         .snapshots();
   }
 
