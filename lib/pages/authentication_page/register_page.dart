@@ -97,35 +97,39 @@ class _RegisterPageState extends State<RegisterPage> {
                         ),
                         5.heightBox,
                         controller.isLoading.value 
-                          ?const CircularProgressIndicator(
-                            valueColor: AlwaysStoppedAnimation(appBlue),
-                          ) 
+                          ?const CircularProgressIndicator( valueColor: AlwaysStoppedAnimation(appBlue),) 
                           :button(
                             color: isTrue == true ? appYellow : grey, text: "Buat Akun", textColor: white, 
                             onPress: () async {
-                              if(isTrue == true){
+                              if(passwordController.text != confirmPassController.text){
+                                VxToast.show(context, msg: "Konfirmasi password tidak sama dengan password!", showTime: 3500, bgColor: Colors.red[400], textColor: white);
+                              }else if(isTrue == true){
                                 controller.isLoading(true);
                                 try {
                                   await controller.registerMethod(
                                     context: context,
                                     email: emailController.text,
                                     password: passwordController.text).then((value){
-                                      return controller.storeUserData(
-                                        name: nameController.text,
-                                        email: emailController.text,
-                                        password: passwordController.text,
-                    
-                                      );
+                                      if(value != null){
+                                        VxToast.show(context, msg: "Berhasil Masuk!");
+                                        Get.offAll(() => const Navigation());
+                                        return controller.storeUserData(
+                                          name: nameController.text,
+                                          email: emailController.text,
+                                          password: passwordController.text,
+                                        );
+                                      }
+                                      controller.isLoading(false);
+                                      
                                     } 
-                                  ).then((value) {
-                                    VxToast.show(context, msg: "Berhasil Masuk!");
-                                    Get.offAll(() => const Navigation());
-                                  });
+                                  );
                                 } catch (e) {
                                   auth.signOut();
                                   VxToast.show(context, msg: e.toString());
                                   controller.isLoading(false);
                                 }
+                              }else{
+                                VxToast.show(context, msg: "Anda harus menyetujui syarat dan ketentuan aplikasi kami.", showTime: 3500, bgColor: Colors.red[400], textColor: white);
                               }
                           }
                         ).box.width(context.screenWidth - 40).make(),

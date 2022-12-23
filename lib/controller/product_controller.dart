@@ -63,7 +63,7 @@ class ProductController extends GetxController {
       'pWishlist': FieldValue.arrayUnion([currentUser!.uid])
     }, SetOptions(merge: true));
     isFavorite(true);
-    VxToast.show(context, msg: "Tambahkan ke daftar favorit");
+    VxToast.show(context, msg: "Produk ditambahkan ke favorit");
   }
 
   removeFromWishList(docId, context) async {
@@ -71,7 +71,7 @@ class ProductController extends GetxController {
       'pWishlist': FieldValue.arrayRemove([currentUser!.uid])
     }, SetOptions(merge: true));
     isFavorite(false);
-    VxToast.show(context, msg: "Hapus dari daftar favorit");
+    VxToast.show(context, msg: "Produk dihapus dari favorit");
   }
 
   checkFavorite(data) async {

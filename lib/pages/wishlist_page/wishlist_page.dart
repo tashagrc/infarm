@@ -1,13 +1,15 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:infarm/constants/constantBuilder.dart';
-import 'package:infarm/controller/chats_controller.dart';
 import 'package:infarm/services/firestore_services.dart';
+
+
 
 class WishlistPage extends StatelessWidget {
   const WishlistPage({super.key});
-
   @override
   Widget build(BuildContext context) {
+    User? currentUserWish = auth.currentUser;
     return Scaffold(
       appBar: AppBar(
         title: "Favorit Saya".text.fontFamily(semiBold).make(),
@@ -60,9 +62,11 @@ class WishlistPage extends StatelessWidget {
                           Icons.favorite,
                           color: Colors.red,
                         ).onTap(() async {
+                          VxToast.show(context, msg: "Favorit berhasil dihapus");
                           await firestore.collection(productsCollection).doc(data[index].id).set({
-                            'pWishlist': FieldValue.arrayRemove([currentUser!.uid])
+                            'pWishlist': FieldValue.arrayRemove([currentUserWish!.uid])
                           }, SetOptions(merge: true));
+                          
                         }),
                       );
                     }

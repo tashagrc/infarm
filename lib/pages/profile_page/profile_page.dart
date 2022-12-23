@@ -94,7 +94,7 @@ class ProfilePage extends StatelessWidget {
                                   Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      "${count[0]}".text.fontFamily(bold).color(darkGrey).size(16).make(),
+                                      count[0].toString().text.fontFamily(bold).color(darkGrey).size(16).make(),
                                       5.heightBox,
                                       "Item di keranjang".text.color(darkGrey).align(TextAlign.center).make(),
                                     ],
@@ -103,7 +103,7 @@ class ProfilePage extends StatelessWidget {
                                   Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      "${count[1]}".text.fontFamily(bold).color(darkGrey).size(16).make(),
+                                      count[1].toString().text.fontFamily(bold).color(darkGrey).size(16).make(),
                                       5.heightBox,
                                       "Total transaksi".text.color(darkGrey).make(),
                                     ],

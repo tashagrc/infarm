@@ -3,6 +3,7 @@ import 'package:infarm/constants/constantBuilder.dart';
 import 'package:infarm/constants/firebaseConstant.dart';
 import 'package:infarm/pages/authentication_page/login_page.dart';
 import 'package:infarm/pages/homescreen_page/navigation.dart';
+import 'package:infarm/pages/onboarding_page/onboarding_page.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -35,7 +36,7 @@ class _SplashScreenState extends State<SplashScreen> {
     Future.delayed(const Duration(seconds: 3), () {
       auth.authStateChanges().listen((User? user) { 
         if(user == null && mounted) {
-          Get.offAll(() => const LoginPage());
+          Get.offAll(() => const OnboardingPage());
         } else {
           Get.offAll(()=> const Navigation());
         }

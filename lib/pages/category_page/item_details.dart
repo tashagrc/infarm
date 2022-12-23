@@ -1,4 +1,5 @@
 import 'package:infarm/constants/constantBuilder.dart';
+import 'package:infarm/controller/chats_controller.dart';
 import 'package:infarm/controller/product_controller.dart';
 import 'package:infarm/pages/chat_screen/chat_screen.dart';
 

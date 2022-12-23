@@ -44,7 +44,7 @@ class OrderPage extends StatelessWidget {
                     },
                     icon: const Icon(Icons.arrow_forward_ios_rounded, color: appBlue,),
                   ),
-                  title: data[index]['order_code'].toString().text.color(appBlue).fontFamily(semiBold).make(),
+                  title: data[index].id.toString().text.color(appBlue).fontFamily(semiBold).make(),
                   subtitle: data[index]['total_amount'].toString().numCurrencyWithLocale(locale: 'id').text.color(darkGrey).fontFamily(bold).make(),
                 );
               },

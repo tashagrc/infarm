@@ -11,7 +11,7 @@ class OrderDetailsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
+      backgroundColor: white,
       appBar: AppBar(
         title: "Detail Pesanan".text.fontFamily(semiBold).make(),
       ),
@@ -29,7 +29,7 @@ class OrderDetailsPage extends StatelessWidget {
               color: Colors.purple, icon: Icons.fire_truck_rounded, title: "Dikirim", isDone: data['order_on_delivery']
             ),
             orderStatus(
-              color: appYellow, icon: Icons.thumb_up, title: "Sampai", isDone: data['order_delivered']
+              color: appYellow, icon: Icons.card_giftcard_rounded, title: "Sampai", isDone: data['order_delivered']
             ),
       
             const Divider(),
@@ -38,7 +38,7 @@ class OrderDetailsPage extends StatelessWidget {
               children: [
                 orderCardDetails(
                   title1: "Kode Transaksi",
-                  sub1: data['order_code'],
+                  sub1: data.id,
                   title2: "Kurir Ekspedisi",
                   sub2: data['shipping_method']
                 ),
@@ -89,7 +89,7 @@ class OrderDetailsPage extends StatelessWidget {
                 )
       
               ],
-            ).box.shadowSm.white.make(),
+            ).box.outerShadowMd.white.make(),
       
             const Divider(),
             10.heightBox,
@@ -106,7 +106,8 @@ class OrderDetailsPage extends StatelessWidget {
                     orderCardDetails(
                       title1: data['orders'][index]['title'],
                       sub1: "${data['orders'][index]['quantity']}x",
-                      title2: data['orders'][index]['totalPrice']
+                      title2: data['orders'][index]['totalPrice'],
+                      sub2: "Garansi"
                     ),
                   ],
                 );

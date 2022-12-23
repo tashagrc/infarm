@@ -60,10 +60,10 @@ class ShippingDetails extends StatelessWidget {
                 child: button(
                     onPress: () {
                       // validasi form, bisa diganti2
-                      if (controller.streetController.text.length > 5) {
+                      if (controller.streetController.text.length > 3) {
                         Get.to(() => const PaymentMethods());
                       } else {
-                        VxToast.show(context, msg: "Mohon isi alamat Anda");
+                        VxToast.show(context, msg: "Alamat harus lebih dari 3 karakter!", showTime: 4000, bgColor: Colors.red[400], textColor: white);
                       }
                     },
                     color: appBlue,
