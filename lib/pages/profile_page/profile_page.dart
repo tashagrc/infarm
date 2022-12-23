@@ -113,29 +113,6 @@ class ProfilePage extends StatelessWidget {
                             }
                           }
                         ),
-                        // Row(
-                        //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        //   children: [
-                        //     Column(
-                        //       mainAxisAlignment: MainAxisAlignment.center,
-                        //       children: [
-                        //         "${data['cartCount']}".text.fontFamily(bold).color(darkGrey).size(16).make(),
-                        //         5.heightBox,
-                        //         "Item di keranjang".text.color(darkGrey).align(TextAlign.center).make(),
-                        //       ],
-                        //     ).box.white.roundedSM.width(context.screenWidth/2.2).height(75).padding(const EdgeInsets.all(4)).make(),
-                            
-                        //     Column(
-                        //       mainAxisAlignment: MainAxisAlignment.center,
-                        //       children: [
-                        //         "${data['orderCount']}".text.fontFamily(bold).color(darkGrey).size(16).make(),
-                        //         5.heightBox,
-                        //         "Total transaksi".text.color(darkGrey).make(),
-                        //       ],
-                        //     ).box.white.roundedSM.width(context.screenWidth/2.2).height(75).padding(const EdgeInsets.all(4)).make(),
-                          
-                        //   ],
-                        // ),
                         25.heightBox,
                         ListView.separated(
                           physics: const NeverScrollableScrollPhysics(),
