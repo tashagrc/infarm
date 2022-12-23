@@ -60,6 +60,12 @@ dev_dependencies:
 
 flutter_native_splash:
   background_image: assets/images/splash.png
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/images/app_logo.png"
+  adaptive_icon_background: "#ffffff"
+  adaptive_icon_foreground: "assets/images/logo_infarm.png"
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
