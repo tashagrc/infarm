@@ -32,11 +32,12 @@ class PaymentMethods extends StatelessWidget {
                     child: Container(
                         clipBehavior: Clip.antiAlias,
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(12),
+                          borderRadius: BorderRadius.circular(4),
                           border: Border.all(
+                            width: 3,
                             color: controller.paymentIndex.value == index
-                                ? appBlue
-                                : Colors.transparent,
+                                ? Colors.green
+                                : appBlue,
                           ),
                         ),
                         margin: const EdgeInsets.only(bottom: 8),
@@ -67,9 +68,9 @@ class PaymentMethods extends StatelessWidget {
                               right: 10,
                               child: paymentMethodNameList[index]
                                   .text
-                                  .white
-                                  .fontFamily(semiBold)
-                                  .size(16)
+                                  .black
+                                  .fontFamily(bold)
+                                  .size(20)
                                   .make()),
                         ])),
                   );

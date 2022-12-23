@@ -67,7 +67,7 @@ class FirestorServices {
     var res = await Future.wait([
       firestore
           .collection(cartCollection)
-          .where('added_by', isEqualTo: currentUserCurr!.uid)
+          .where('userId', isEqualTo: currentUserCurr!.uid)
           .get()
           .then((value) {
         return value.docs.length;

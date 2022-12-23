@@ -51,8 +51,8 @@ const onboarding2 = 'assets/images/onboarding2.png';
 const onboarding3 = 'assets/images/onboarding3.png';
 const bcaPayment = 'assets/images/bca_payment.png';
 // ganti gambar
-const briPayment = 'assets/images/bca_payment.png';
-const cashPayment = 'assets/images/bca_payment.png';
+const briPayment = 'assets/images/bri_payment.png';
+const cashPayment = 'assets/images/tunai_payment.png';
 
 //ICON
 const cartIcon = 'assets/icons/cart.png';

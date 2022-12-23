@@ -12,7 +12,7 @@ class SearchScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: white,
       appBar: AppBar(
-        title: title!.text.color(darkGrey).make(),
+        title: title!.text.make(),
       ),
       body: FutureBuilder(
           future: FirestorServices.searchProducts(title),

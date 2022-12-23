@@ -29,10 +29,6 @@ class ItemDetails extends StatelessWidget {
                   Get.back();
                 }),
             actions: [
-              IconButton(
-                onPressed: () {},
-                icon: const Icon(Icons.share),
-              ),
               Obx(
                 () => IconButton(
                   onPressed: () {
@@ -44,7 +40,7 @@ class ItemDetails extends StatelessWidget {
                   },
                   icon: Icon(
                     Icons.favorite_outlined,
-                    color: controller.isFavorite.value ? Colors.red : grey,
+                    color: controller.isFavorite.value ? Colors.red : white,
                   ),
                 ),
               ),
