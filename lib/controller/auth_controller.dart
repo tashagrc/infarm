@@ -29,7 +29,7 @@ class AuthController extends GetxController{
           VxToast.show(context, msg: "Masukkan format email yang valid!", showTime: 4000, bgColor: Colors.red[400], textColor: white);
           break;
         default:
-          VxToast.show(context, msg: e.toString());
+          VxToast.show(context, msg: e.toString(), showTime: 4000, bgColor: Colors.red[400], textColor: white);
       } 
         
     }
@@ -54,7 +54,7 @@ class AuthController extends GetxController{
           VxToast.show(context, msg: "Masukkan format email yang valid!", showTime: 4000, bgColor: Colors.red[400], textColor: white);
           break;
         default:
-          VxToast.show(context, msg: e.toString());
+          VxToast.show(context, msg: e.toString(), showTime: 4000, bgColor: Colors.red[400], textColor: white);
       } 
     }
     return userCredential;
@@ -68,6 +68,28 @@ class AuthController extends GetxController{
       VxToast.show(context, msg: e.toString());
     }
   }
+
+  Future resetPassword({context, email}) async {
+    try{
+      await auth.sendPasswordResetEmail(email: email.text.trim());
+    }on FirebaseAuthException catch(e){
+      switch(e.code){
+        case "unknown":
+          VxToast.show(context, msg: "Silahkan isi alamat email!", showTime: 4000, bgColor: Colors.red[400], textColor: white);
+          break;
+        case "user-not-found":
+          VxToast.show(context, msg: "Email tidak terdaftar", showTime: 4000, bgColor: Colors.red[400], textColor: white);
+          break;
+        case "invalid-email":
+          VxToast.show(context, msg: "Masukkan format email yang valid!", showTime: 4000, bgColor: Colors.red[400], textColor: white);
+          break;
+        default:
+          VxToast.show(context, msg: e.toString(), showTime: 4000, bgColor: Colors.red[400], textColor: white);
+      }
+    }
+    
+  }
+
 
   //TO STORE DATA
   storeUserData({name, password, email}) async{

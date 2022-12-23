@@ -1,7 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:infarm/constants/constantBuilder.dart';
 import 'package:infarm/controller/chats_controller.dart';
 import 'package:infarm/controller/product_controller.dart';
 import 'package:infarm/pages/chat_screen/chat_screen.dart';
+import 'package:infarm/services/firestore_services.dart';
 import 'package:intl/intl.dart'  as intl;
 
 class ItemDetails extends StatelessWidget {
@@ -62,8 +64,13 @@ class ItemDetails extends StatelessWidget {
                         aspectRatio: 16 / 9,
                         viewportFraction: 1.0,
                         itemBuilder: (context, index) {
-                          return Image.network(data['pImages'][index],
-                              width: double.infinity, fit: BoxFit.contain);
+                          return FadeInImage.assetNetwork(
+                            placeholder: imageLoading,
+                            image: data['pImages'][index],
+                            width: double.infinity, 
+                            fit: BoxFit.contain,
+                            
+                          );
                         }),
                     10.heightBox,
 
@@ -273,52 +280,90 @@ class ItemDetails extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(horizontal: 10),
                       physics: const BouncingScrollPhysics(),
                       scrollDirection: Axis.horizontal,
-                      child: Row(
-                        children: List.generate(
-                            6,
-                            (index) => Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
+                      child: FutureBuilder(
+                        future: FirestorServices.getFeaturedProducts(),
+                        builder: (context, AsyncSnapshot<QuerySnapshot>featuredsnapshot) {
+                          if (!featuredsnapshot.hasData) {
+                            return Row(
+                              children: List.generate(
+                                4,
+                                (index) => Column(
+                                  crossAxisAlignment:CrossAxisAlignment.start,
                                   children: [
-                                    ClipRRect(
-                                      borderRadius: const BorderRadius.only(
-                                          topLeft: Radius.circular(7),
-                                          topRight: Radius.circular(7)),
-                                      child: Image.asset(
-                                        product1,
+                                    Container(
+                                      width: 150,
+                                      height: 150,
+                                      decoration: BoxDecoration(
+                                        color: Colors.black.withOpacity(0.1),
+                                        borderRadius: const BorderRadius.only(topLeft: Radius.circular(7), topRight: Radius.circular(7))
+                                      ),
+                                    ),
+                                    
+                                    10.heightBox,
+                                    const Padding(
+                                      padding: EdgeInsets.symmetric(horizontal: 10),
+                                      child: Skeleton(15, 125),
+                                    ),
+                                    
+                                    7.heightBox,
+                                    const Padding(
+                                      padding: EdgeInsets.symmetric(horizontal: 10),
+                                      child: Skeleton(15, 100),
+                                    ),
+                                    7.heightBox
+                                  ],
+                                ).box.white.roundedSM.margin(const EdgeInsets.symmetric(horizontal: 4)).make()
+                              ),
+                            );
+                          }else {
+                            var featuredData =featuredsnapshot.data!.docs;
+                            return Row(
+                              children: List.generate(
+                                featuredData.length,
+                                (index) => Column(
+                                  crossAxisAlignment:CrossAxisAlignment.start,
+                                  children: [
+                                    ClipRRect(borderRadius:
+                                      const BorderRadius.only(topLeft:Radius.circular(7),topRight:Radius.circular(7)),
+                                      child: FadeInImage.assetNetwork(
+                                        placeholder: imageLoading,
+                                        image: featuredData[index]['pImages'][0],
                                         width: 150,
+                                        height: 150,
                                         fit: BoxFit.cover,
                                       ),
                                     ),
                                     10.heightBox,
                                     Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 8),
-                                      child: "Pestisida Pesnab"
-                                          .text
-                                          .fontFamily(semiBold)
-                                          .color(darkGrey)
-                                          .make(),
+                                      padding: const EdgeInsets.symmetric(horizontal: 8),
+                                      child:"${featuredData[index]['pName']}".text.fontFamily(semiBold).color(darkGrey).make(),
                                     ),
                                     7.heightBox,
                                     Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 8),
-                                      child: "Rp24.000"
-                                          .text
-                                          .fontFamily(bold)
-                                          .color(appYellow)
-                                          .size(16)
-                                          .make(),
+                                      padding: const EdgeInsets.symmetric(horizontal: 8),
+                                      child:Text(
+                                        intl.NumberFormat.currency(
+                                          locale: 'id',
+                                          symbol: 'Rp ',
+                                          decimalDigits: 2,
+                                        ).format(int.parse(featuredData[index]['pPrice'])),
+                                        style: const TextStyle(
+                                          fontFamily: bold,
+                                          fontSize: 16,
+                                          color: appYellow
+                                        ),
+                                      ),
                                     ),
                                     7.heightBox
                                   ],
+                                ).box.white.roundedSM.margin(const EdgeInsets.symmetric(horizontal: 4)).make().onTap(() {
+                                    Get.to(() => ItemDetails(title:"${featuredData[index]['pName']}",data: featuredData[index],));
+                                  }
                                 )
-                                    .box
-                                    .white
-                                    .roundedSM
-                                    .margin(const EdgeInsets.symmetric(
-                                        horizontal: 4))
-                                    .make()),
+                              ),
+                            );
+                          }
+                        }
                       ),
                     ),
                     15.heightBox

@@ -47,6 +47,8 @@ const splashBg = 'assets/images/splash.png';
 const categoryEmpty = 'assets/images/category_empty.png';
 const cartEmpty = 'assets/images/cart_empty.png';
 const favEmpty = 'assets/images/fav_empty.png';
+const imageLoading = 'assets/images/image_loading.png';
+const notLoaded = 'assets/images/not_loaded.png';
 const onboarding1 = 'assets/images/onboarding1.png';
 const onboarding2 = 'assets/images/onboarding2.png';
 const onboarding3 = 'assets/images/onboarding3.png';
@@ -62,7 +64,7 @@ const historyIcon = 'assets/icons/history.png';
 const homeIcon = 'assets/icons/home.png';
 const chatIcon = 'assets/icons/chat.png';
 const profileIcon = 'assets/icons/profile.png';
-const forgetPassIcon = 'asssets/icons/forget_pass.png';
+const forgetPassIcon = 'assets/icons/forget_pass.png';
 const profilePic = 'assets/icons/profilePic.png';
 const favIcon = 'assets/icons/favourite.png';
 

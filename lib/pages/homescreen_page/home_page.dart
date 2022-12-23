@@ -177,7 +177,12 @@ class _HomePageState extends State<HomePage> {
                                         children: [
                                           ClipRRect(borderRadius:
                                             const BorderRadius.only(topLeft:Radius.circular(7),topRight:Radius.circular(7)),
-                                            child: Image.network(featuredData[index]['pImages'][0],
+                                            child: FadeInImage.assetNetwork(
+                                              imageErrorBuilder: (context, error, stackTrace) {
+                                                return Image.asset(notLoaded, width: 150, height: 150,);
+                                              },
+                                              placeholder: imageLoading,
+                                              image: featuredData[index]['pImages'][0],
                                               width: 150,
                                               height: 150,
                                               fit: BoxFit.cover,
@@ -295,11 +300,12 @@ class _HomePageState extends State<HomePage> {
                               children: [
                                 ClipRRect(
                                     borderRadius: const BorderRadius.only(topLeft: Radius.circular(8), topRight: Radius.circular(8)),
-                                    child: Image.network(
-                                      allProductsData[index]['pImages'][0],
+                                    child: FadeInImage.assetNetwork(
+                                      placeholder: imageLoading,
+                                      image: allProductsData[index]['pImages'][0],
                                       width: 200,
                                       height: 170,
-                                      fit: BoxFit.cover
+                                      fit: BoxFit.cover,
                                     )
                                 ),
                                 const Spacer(),

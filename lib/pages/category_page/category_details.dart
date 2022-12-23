@@ -143,12 +143,13 @@ class _CategoryDetailsState extends State<CategoryDetails> {
                                   borderRadius: const BorderRadius.only(
                                       topLeft: Radius.circular(7),
                                       topRight: Radius.circular(7)),
-                                  child: Image.network(
-                                    data[index]['pImages'][0],
+                                  child: FadeInImage.assetNetwork(
+                                    placeholder: imageLoading,
+                                    image: data[index]['pImages'][0],
                                     fit: BoxFit.cover,
                                     height: 160,
                                     width: 200,
-                                  ).box.roundedSM.clip(Clip.antiAlias).make(),
+                                  ).box.clip(Clip.antiAlias).make(),
                                 ),
                                 10.heightBox,
                                 Padding(

@@ -1,5 +1,6 @@
 import 'package:infarm/constants/constantBuilder.dart';
 import 'package:infarm/controller/auth_controller.dart';
+import 'package:infarm/pages/authentication_page/forget_password_page.dart';
 import 'package:infarm/pages/authentication_page/register_page.dart';
 import 'package:infarm/pages/homescreen_page/navigation.dart';
 
@@ -37,7 +38,9 @@ class LoginPage extends StatelessWidget {
                         Align(
                           alignment: Alignment.centerRight,
                           child: TextButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Get.to(() => const ForgetPasswordPage());
+                            },
                             child: "Lupa Password?".text.make()
                           ),
                         ),
