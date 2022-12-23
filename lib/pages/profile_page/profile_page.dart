@@ -28,9 +28,103 @@ class ProfilePage extends StatelessWidget {
       body: StreamBuilder(
         stream: FirestorServices.getUser(currentUser!.uid),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-          
           if(!snapshot.hasData){
-            return const Center(child: CircularProgressIndicator(valueColor: AlwaysStoppedAnimation(appBlue),),);
+            return Stack(
+              children: [
+                Container(
+                  decoration: const BoxDecoration(
+                    image: DecorationImage(image: AssetImage(batikBg), fit: BoxFit.fill)
+                  ),
+                ),
+                SafeArea(
+                  child: Container(
+                    padding: const EdgeInsets.all(8),
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(10),
+                          child: Row(
+                            children: [
+                              Image.asset(profilePic, width: 70, fit: BoxFit.cover,).box.roundedFull.clip(Clip.antiAlias).make(),
+                              10.widthBox,
+                              Expanded(child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const Skeleton2(15, 150),
+                                  5.heightBox,
+                                  const Skeleton2(15, 100)
+                                ],
+                              )),
+                              const Skeleton2(45, 90)
+                            ],
+                          ),
+                        ),
+
+                        5.heightBox,
+
+                        FutureBuilder(
+                          future: FirestorServices.getCounts(),
+                          builder: (BuildContext context, AsyncSnapshot snapshot){
+                            if(true){
+                              return Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      const Skeleton(15, 30),
+                                      10.heightBox,
+                                      const Skeleton(15, 120)
+                                    ],
+                                  ).box.white.roundedSM.width(context.screenWidth/2.2).height(75).padding(const EdgeInsets.all(4)).make(),
+                                  
+                                  Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      const Skeleton(15, 30),
+                                      10.heightBox,
+                                      const Skeleton(15, 100)
+                                    ],
+                                  ).box.white.roundedSM.width(context.screenWidth/2.2).height(75).padding(const EdgeInsets.all(4)).make(),
+                                ],
+                              );
+
+                            }
+                          }
+                        ),
+                        25.heightBox,
+                        ListView.separated(
+                          physics: const NeverScrollableScrollPhysics(),
+                          shrinkWrap: true,
+                          separatorBuilder: (context, index) {
+                            return const Divider(color: grey,);
+                          },
+                          itemCount: btnList.length,
+                          itemBuilder: (context, index) {
+                            return ListTile(
+                              leading: Container(
+                                height: 30,
+                                width: 30,
+                                padding: const EdgeInsets.symmetric(horizontal: 0),
+                                child: Container(
+                                  padding: const EdgeInsets.all(8),
+                                  decoration: BoxDecoration(
+                                    color: Colors.black.withOpacity(0.1),
+                                    borderRadius: const BorderRadius.all(Radius.circular(100)),
+                                  ),
+                                ),
+                              ),
+                              title: const Skeleton(15, 10),
+                              
+                            );
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            );
           }else{
             var data = snapshot.data!.docs[0];
             return Stack(
@@ -51,7 +145,10 @@ class ProfilePage extends StatelessWidget {
                             children: [
                               data['imageUrl'] == '' 
                               ?Image.asset(profilePic, width: 70, fit: BoxFit.cover,).box.roundedFull.clip(Clip.antiAlias).make()
-                              :Image.network(data['imageUrl'], width: 70, height: 70, fit: BoxFit.cover,).box.roundedFull.clip(Clip.antiAlias).make(),
+                              :FadeInImage.assetNetwork(
+                                placeholder: profilePic,
+                                image: data['imageUrl'], width: 70, height: 70, fit: BoxFit.cover,).box.roundedFull.clip(Clip.antiAlias
+                              ).make(),
                               
                               10.widthBox,
                               Expanded(child: Column(

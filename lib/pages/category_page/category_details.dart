@@ -46,7 +46,7 @@ class _CategoryDetailsState extends State<CategoryDetails> {
         children: [
           // SUBKATEGORI ATAS
           SingleChildScrollView(
-            padding: EdgeInsets.symmetric(vertical: 15,),
+            padding: const EdgeInsets.symmetric(vertical: 15,horizontal: 10),
             physics: const BouncingScrollPhysics(),
             scrollDirection: Axis.horizontal,
             child: Row(
@@ -66,7 +66,6 @@ class _CategoryDetailsState extends State<CategoryDetails> {
                     .margin(const EdgeInsets.symmetric(horizontal: 4, vertical: 0))
                     .make()
                     .onTap(() {
-                      
                       switchCategory("${controller.subcat[index]}");
                       setState(() {});
                     })
@@ -92,110 +91,129 @@ class _CategoryDetailsState extends State<CategoryDetails> {
             ),
           ),
           0.heightBox,
-          StreamBuilder(
-              stream: productMethod,
-              builder: (BuildContext context,
-                  AsyncSnapshot<QuerySnapshot> snapshot) {
-                if (!snapshot.hasData) {
-                  return const Expanded(
-                    child: Center(
-                      child: CircularProgressIndicator(
-                        valueColor: AlwaysStoppedAnimation(appBlue),
-                      ),
-                    ),
-                  );
-                } else if (snapshot.data!.docs.isEmpty) {
-                  return Expanded(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Image.asset(
-                          categoryEmpty,
-                          width: 180,
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+              child: StreamBuilder(
+                  stream: productMethod,
+                  builder: (BuildContext context,AsyncSnapshot<QuerySnapshot> snapshot) {
+                    if (!snapshot.hasData) {
+                      return GridView.builder(
+                        physics: const BouncingScrollPhysics(),
+                        shrinkWrap: true,
+                        itemCount: 6,
+                        gridDelegate:const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          mainAxisExtent: 250,
+                          mainAxisSpacing: 2,
+                          crossAxisSpacing: 2
                         ),
-                        20.heightBox,
-                        "Kategori ini masih kosong"
-                            .text
-                            .size(17)
-                            .color(darkGrey)
-                            .makeCentered()
-                      ],
-                    ),
-                  );
-                } else {
-                  var data = snapshot.data!.docs;
-                  return Expanded(
-                      child: GridView.builder(
-                          physics: const BouncingScrollPhysics(),
-                          shrinkWrap: true,
-                          itemCount: data.length,
-                          gridDelegate:
-                              const SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: 2,
-                                  mainAxisExtent: 250,
-                                  mainAxisSpacing: 8,
-                                  crossAxisSpacing: 8),
-                          itemBuilder: (context, index) {
-                            return Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                ClipRRect(
-                                  borderRadius: const BorderRadius.only(
-                                      topLeft: Radius.circular(7),
-                                      topRight: Radius.circular(7)),
-                                  child: FadeInImage.assetNetwork(
-                                    placeholder: imageLoading,
-                                    image: data[index]['pImages'][0],
-                                    fit: BoxFit.cover,
-                                    height: 160,
-                                    width: 200,
-                                  ).box.clip(Clip.antiAlias).make(),
-                                ),
-                                10.heightBox,
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.symmetric(horizontal: 8),
-                                  child: "${data[index]['pName']}"
-                                      .text
-                                      .fontFamily(semiBold)
-                                      .color(darkGrey)
-                                      .make(),
-                                ),
-                                7.heightBox,
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.symmetric(horizontal: 8),
-                                  child: Text(
-                                    intl.NumberFormat.currency(
-                                      locale: 'id',
-                                      symbol: 'Rp ',
-                                      decimalDigits: 2,
-                                    ).format(int.parse(data[index]['pPrice'])),
-                                    style: const TextStyle(
-                                      fontFamily: bold,
-                                      fontSize: 16,
-                                      color: appYellow
-                                    ),
+                        itemBuilder: (context, index) {
+                          return Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
+                                height: 160,
+                                width: 200,
+                                padding: const EdgeInsets.symmetric(horizontal: 0),
+                                child: Container(
+                                  padding: const EdgeInsets.all(8),
+                                  decoration: BoxDecoration(
+                                    color: Colors.black.withOpacity(0.1),
+                                    borderRadius: const BorderRadius.only(topLeft: Radius.circular(8), topRight: Radius.circular(8)),
                                   ),
                                 ),
-                                7.heightBox
-                              ],
-                            )
-                                .box
-                                .white
-                                .roundedSM
-                                .outerShadowSm
-                                .margin(
-                                    const EdgeInsets.symmetric(horizontal: 4))
-                                .make()
-                                .onTap(() {
+                              ),
+                              10.heightBox,
+                              const Padding(
+                                padding: EdgeInsets.symmetric(horizontal: 8),
+                                child: Skeleton(15, 140),
+                              ),
+                              7.heightBox,
+                              const Padding(
+                                padding: EdgeInsets.symmetric(horizontal: 8),
+                                child: Skeleton(20, 100)
+                              ),
+                              7.heightBox
+                            ],
+                          ).box.white.roundedSM.outerShadowSm.margin(const EdgeInsets.symmetric(horizontal: 4, vertical: 4)).make();
+                        }
+                      );
+                    } else if (snapshot.data!.docs.isEmpty) {
+                      return Expanded(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Image.asset(categoryEmpty,width: 180,),
+                            20.heightBox,
+                            "Kategori ini masih kosong".text.size(17).color(darkGrey).makeCentered()
+                          ],
+                        ),
+                      );
+                    } else {
+                      var data = snapshot.data!.docs;
+                      return GridView.builder(
+                        physics: const BouncingScrollPhysics(),
+                        shrinkWrap: true,
+                        itemCount: data.length,
+                        gridDelegate:const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
+                            mainAxisExtent: 250,
+                            mainAxisSpacing: 2,
+                            crossAxisSpacing: 2
+                        ),
+                        itemBuilder: (context, index) {
+                          return Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              ClipRRect(
+                                borderRadius: const BorderRadius.only(topLeft: Radius.circular(7),topRight: Radius.circular(7)),
+                                child: FadeInImage.assetNetwork(
+                                  placeholder: imageLoading,
+                                  image: data[index]['pImages'][0],
+                                  fit: BoxFit.cover,
+                                  height: 160,
+                                  width: 200,
+                                ).box.clip(Clip.antiAlias).make(),
+                              ),
+                              10.heightBox,
+                              Padding(
+                                padding:const EdgeInsets.symmetric(horizontal: 8),
+                                child: data[index]['pName'].toString().length > 18
+                                  ?"${data[index]['pName'].toString().substring(0, 18)}...".text.fontFamily(semiBold).color(darkGrey).make()
+                                  :"${data[index]['pName']}".text.fontFamily(semiBold).color(darkGrey).make()
+                              ),
+                              7.heightBox,
+                              Padding(
+                                padding:const EdgeInsets.symmetric(horizontal: 8),
+                                child: Text(
+                                  intl.NumberFormat.currency(
+                                    locale: 'id',
+                                    symbol: 'Rp ',
+                                    decimalDigits: 2,
+                                  ).format(int.parse(data[index]['pPrice'])),
+                                  style: const TextStyle(
+                                    fontFamily: bold,
+                                    fontSize: 16,
+                                    color: appYellow
+                                  ),
+                                ),
+                              ),
+                              7.heightBox
+                            ],
+                          ).box.white.roundedSM.outerShadowSm.margin(const EdgeInsets.symmetric(horizontal: 4, vertical: 4)).make().onTap(() {
                               controller.checkFavorite(data[index]);
                               Get.to(() => ItemDetails(
-                                  title: "Detail Produk", data: data[index]));
-                            });
-                          }));
-                }
-              }),
+                                  title: "Detail Produk", data: data[index])
+                              );
+                            }
+                          );
+                        }
+                      );
+                    }
+                  }),
+            ),
+          ),
         ],
       ),
     );

@@ -44,13 +44,8 @@ class _RegisterPageState extends State<RegisterPage> {
                         textField(title: email, hint: emailHint, controller: emailController, isObscure: false), 16.heightBox,
                         textField(title: password, hint: passwordHint, controller: passwordController, isObscure: true), 16.heightBox,
                         textField(title: "Konfirmasi Password", hint: passwordHint, controller: confirmPassController, isObscure: true),
-                        Align(
-                          alignment: Alignment.centerRight,
-                          child: TextButton(
-                            onPressed: () {},
-                            child: "Lupa Password?".text.make()),
-                        ),
-                        5.heightBox,
+                        
+                        15.heightBox,
                         Row(
                           children: [
                             Checkbox(
@@ -64,7 +59,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                 
                               }
                             ),
-                  
+
                             10.widthBox,
                             Expanded(
                               child: RichText(text: const TextSpan(
@@ -95,7 +90,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             )
                           ],
                         ),
-                        5.heightBox,
+                        15.heightBox,
                         controller.isLoading.value 
                           ?const CircularProgressIndicator( valueColor: AlwaysStoppedAnimation(appBlue),) 
                           :button(

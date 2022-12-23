@@ -30,51 +30,68 @@ class SearchScreen extends StatelessWidget {
               var data = snapshot.data!.docs;
               var filteredData = data.where((element) => element['pName'].toString().toLowerCase().contains(title!.toLowerCase())).toList();
               return Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: GridView(
-                  gridDelegate:const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    mainAxisSpacing: 8,
-                    crossAxisSpacing: 1,
-                    mainAxisExtent: 270
-                  ),
-                  children: filteredData.mapIndexed((currentValue, index) => Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      ClipRRect(
-                        borderRadius: const BorderRadius.only(
-                          topLeft: Radius.circular(8),
-                          topRight: Radius.circular(8)
+                padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 10),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    5.heightBox,
+                    "Hasil Pencarian".text.color(appBlue).size(20).fontFamily(semiBold).make(),
+                    "Jumlah produk ditemukan: ${snapshot.data!.size}".text.color(grey).size(15).make(),
+                    5.heightBox,
+                    const Divider(thickness: 2,color: lightGrey),
+                    15.heightBox,
+                    Expanded(
+                      child: GridView(
+                        physics: const BouncingScrollPhysics(),
+                        gridDelegate:const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          mainAxisSpacing: 1,
+                          crossAxisSpacing: 1,
+                          mainAxisExtent: 270
                         ),
-                        child: Image.network(
-                          filteredData[index]['pImages'][0],
-                          width: 200,
-                          height: 170,
-                          fit: BoxFit.cover
-                        )
+                        children: filteredData.mapIndexed((currentValue, index) => Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            ClipRRect(
+                              borderRadius: const BorderRadius.only(
+                                topLeft: Radius.circular(8),
+                                topRight: Radius.circular(8)
+                              ),
+                              child: Image.network(
+                                filteredData[index]['pImages'][0],
+                                width: 200,
+                                height: 170,
+                                fit: BoxFit.cover
+                              )
+                            ),
+                            const Spacer(),
+                            Padding(
+                              padding:const EdgeInsets.symmetric(horizontal: 8),
+                              child: filteredData[index]['pName'].toString().length > 27
+                                  ?"${filteredData[index]['pName'].toString().substring(0, 27)}...".text.fontFamily(semiBold).color(darkGrey).make()
+                                  :"${filteredData[index]['pName']}".text.fontFamily(semiBold).color(darkGrey).make()
+                              // "${filteredData[index]['pName']}".text.fontFamily(semiBold).color(darkGrey).make(),
+                            ),
+                            10.heightBox,
+                            Padding(
+                              padding:const EdgeInsets.symmetric(horizontal: 8),
+                              child: "${filteredData[index]['pPrice']}"
+                                .numCurrencyWithLocale(locale: 'id')
+                                .text
+                                .fontFamily(bold)
+                                .color(appYellow)
+                                .size(16)
+                                .make(),
+                            ),
+                            10.heightBox,
+                          ],
+                        ).box.white.margin(const EdgeInsets.symmetric(horizontal: 4, vertical: 8)).roundedSM.outerShadowMd.make().onTap(() {
+                          Get.to(() => ItemDetails(title: "${filteredData[index]['pName']}",data: filteredData[index],));
+                        })
+                        ).toList()
                       ),
-                      const Spacer(),
-                      Padding(
-                        padding:const EdgeInsets.symmetric(horizontal: 8),
-                        child: "${filteredData[index]['pName']}".text.fontFamily(semiBold).color(darkGrey).make(),
-                      ),
-                      10.heightBox,
-                      Padding(
-                        padding:const EdgeInsets.symmetric(horizontal: 8),
-                        child: "${filteredData[index]['pPrice']}"
-                          .numCurrencyWithLocale(locale: 'id')
-                          .text
-                          .fontFamily(bold)
-                          .color(appYellow)
-                          .size(16)
-                          .make(),
-                      ),
-                      10.heightBox,
-                    ],
-                  ).box.white.margin(const EdgeInsets.symmetric(horizontal: 4, vertical: 10)).roundedSM.outerShadowSm.make().onTap(() {
-                    Get.to(() => ItemDetails(title: "${filteredData[index]['pName']}",data: filteredData[index],));
-                  })
-                  ).toList()
+                    ),
+                  ],
                 ),
               );
             }

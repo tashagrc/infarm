@@ -82,38 +82,33 @@ class _HomePageState extends State<HomePage> {
 
                   // CATEGORY
                   Container(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 10, vertical: 10),
+                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                     child: GridView.builder(
-                        padding: const EdgeInsets.all(0),
-                        shrinkWrap: true,
-                        itemCount: 4,
-                        physics: const NeverScrollableScrollPhysics(),
-                        gridDelegate:const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
-                          mainAxisSpacing: 10,
-                          crossAxisSpacing: 10,
-                          mainAxisExtent: 100
-                        ),
-                        itemBuilder: (context, index) {
-                          return Stack(
-                            children: [
-                              Image.asset(categoryImages[index],height: 100, width: 300, fit: BoxFit.cover),
-                              Center(
-                                child: categoryNameList[index]
-                                  .text
-                                  .color(white)
-                                  .align(TextAlign.center)
-                                  .fontFamily(bold)
-                                  .size(20)
-                                  .make()
-                              ),
-                            ],
-                          ).box.white.roundedSM.clip(Clip.antiAlias).outerShadowSm.make().onTap(() {
-                              productController.getSubCategories(categoryNameList[index]);
-                              Get.to(() => CategoryDetails(title: categoryNameList[index]));
-                          });
-                        }),
+                      padding: const EdgeInsets.all(0),
+                      shrinkWrap: true,
+                      itemCount: 4,
+                      physics: const NeverScrollableScrollPhysics(),
+                      gridDelegate:const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        mainAxisSpacing: 10,
+                        crossAxisSpacing: 10,
+                        mainAxisExtent: 100
+                      ),
+                      itemBuilder: (context, index) {
+                        return Stack(
+                          children: [
+                            Image.asset(categoryImages[index],height: 100, width: 300, fit: BoxFit.cover),
+                            Center(
+                              child: categoryNameList[index].text.color(white).align(TextAlign.center).fontFamily(bold).size(20).make()
+                            ),
+                          ],
+                        ).box.white.roundedSM.clip(Clip.antiAlias).outerShadowSm.make().onTap(() {
+                            productController.getSubCategories(categoryNameList[index]);
+                            Get.to(() => CategoryDetails(title: categoryNameList[index]));
+                          }
+                        );
+                      }
+                    ),
                   ),
 
                   10.heightBox,
@@ -191,7 +186,9 @@ class _HomePageState extends State<HomePage> {
                                           10.heightBox,
                                           Padding(
                                             padding: const EdgeInsets.symmetric(horizontal: 8),
-                                            child:"${featuredData[index]['pName']}".text.fontFamily(semiBold).color(darkGrey).make(),
+                                            child: featuredData[index]['pName'].toString().length > 18 
+                                              ?"${featuredData[index]['pName'].toString().substring(0, 18)}...".text.fontFamily(semiBold).color(darkGrey).make()
+                                              :"${featuredData[index]['pName']}".text.fontFamily(semiBold).color(darkGrey).make()
                                           ),
                                           7.heightBox,
                                           Padding(
@@ -290,7 +287,7 @@ class _HomePageState extends State<HomePage> {
                           itemCount: allProductsData.length,
                           gridDelegate:const SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 2,
-                            mainAxisSpacing: 8,
+                            mainAxisSpacing: 1,
                             crossAxisSpacing: 1,
                             mainAxisExtent: 270
                           ),
@@ -311,7 +308,9 @@ class _HomePageState extends State<HomePage> {
                                 const Spacer(),
                                 Padding(
                                   padding: const EdgeInsets.symmetric(horizontal: 8),
-                                  child: "${allProductsData[index]['pName']}".text.fontFamily(semiBold).color(darkGrey).make(),
+                                  child: allProductsData[index]['pName'].toString().length > 20
+                                    ?"${allProductsData[index]['pName'].toString().substring(0, 20)}...".text.fontFamily(semiBold).color(darkGrey).make()
+                                    :"${allProductsData[index]['pName']}".text.fontFamily(semiBold).color(darkGrey).make()
                                 ),
                                 10.heightBox,
                                 Padding(
@@ -334,7 +333,7 @@ class _HomePageState extends State<HomePage> {
                             )
                             .box
                             .white
-                            .margin(const EdgeInsets.symmetric(horizontal: 4, vertical: 10))
+                            .margin(const EdgeInsets.symmetric(horizontal: 4, vertical: 4))
                             .roundedSM
                             .make()
                             .onTap(() {

@@ -31,7 +31,7 @@ class _ForgetPasswordPageState extends State<ForgetPasswordPage> {
                 IconButton(onPressed: (){Get.back();}, icon: const Icon(Icons.arrow_back_rounded, color: white, size: 30,)),
                 Image.asset(forgetPassIcon, width: 70,).centered(),
                 10.heightBox,
-                "Lupas Password?".text.white.size(25).fontFamily(bold).makeCentered(),
+                "Lupa Password?".text.white.size(25).fontFamily(bold).makeCentered(),
                 15.heightBox,
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,

@@ -64,28 +64,32 @@ class OrderPage extends StatelessWidget {
                 return Padding(
                   padding: const EdgeInsets.all(15),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       "${index+1}".text.fontFamily(bold).color(darkGrey).xl.make(),
 
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            "Order ID: ${data[index].id}".toString().text.color(appBlue).fontFamily(semiBold).make(),
-                            Text(
-                              intl.NumberFormat.currency(
-                                locale: 'id',
-                                symbol: 'Rp ',
-                                decimalDigits: 2,
-                              ).format(data[index]['total_amount']),
-                              style: const TextStyle(
-                                fontFamily: bold,
-                                fontSize: 16,
-                                color: appBlue
+                      Container(
+                        width: context.screenWidth*0.7,
+                        padding: const EdgeInsets.only(left: 15),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              "Order ID: ${data[index].id}".toString().text.color(appBlue).fontFamily(semiBold).make(),
+                              Text(
+                                intl.NumberFormat.currency(
+                                  locale: 'id',
+                                  symbol: 'Rp ',
+                                  decimalDigits: 2,
+                                ).format(data[index]['total_amount']),
+                                style: const TextStyle(
+                                  fontFamily: bold,
+                                  fontSize: 16,
+                                  color: appBlue
+                                ),
                               ),
-                            ),
-                            "Tanggal: ${intl.DateFormat.yMd().add_jm().format((data[index]['order_date'].toDate()))}".text.make()
-                          ],
+                              "Tanggal: ${intl.DateFormat.yMd().add_Hm().format((data[index]['order_date'].toDate()))}".text.make()
+                            ],
+                        ),
                       ),
 
                       IconButton(
