@@ -2,6 +2,7 @@ import 'package:infarm/constants/constantBuilder.dart';
 import 'package:infarm/controller/chats_controller.dart';
 import 'package:infarm/controller/product_controller.dart';
 import 'package:infarm/pages/chat_screen/chat_screen.dart';
+import 'package:intl/intl.dart'  as intl;
 
 class ItemDetails extends StatelessWidget {
   final String? title;
@@ -69,13 +70,19 @@ class ItemDetails extends StatelessWidget {
                     //PRICE
                     Container(
                         padding: const EdgeInsets.symmetric(horizontal: 10),
-                        child: "${data['pPrice']}"
-                            .numCurrencyWithLocale(locale: 'id')
-                            .text
-                            .color(appBlue)
-                            .fontFamily(bold)
-                            .size(23)
-                            .make()),
+                        child: Text(
+                          intl.NumberFormat.currency(
+                            locale: 'id',
+                            symbol: 'Rp ',
+                            decimalDigits: 2,
+                          ).format(int.parse(data['pPrice'])),
+                          style: const TextStyle(
+                            fontFamily: bold,
+                            fontSize: 23,
+                            color: appBlue
+                          ),
+                        ),
+                    ),
 
                     3.heightBox,
 

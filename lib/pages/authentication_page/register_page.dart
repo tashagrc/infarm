@@ -112,6 +112,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                     password: passwordController.text).then((value){
                                       if(value != null){
                                         VxToast.show(context, msg: "Berhasil Masuk!");
+                                        controller.isLoading(false);
                                         Get.offAll(() => const Navigation());
                                         return controller.storeUserData(
                                           name: nameController.text,

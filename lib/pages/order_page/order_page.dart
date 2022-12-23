@@ -3,8 +3,6 @@ import 'package:infarm/constants/constantBuilder.dart';
 import 'package:infarm/pages/order_page/order_details_page.dart';
 import 'package:infarm/services/firestore_services.dart';
 import 'package:intl/intl.dart'  as intl;
-import 'package:intl/date_symbol_data_local.dart';
-
 class OrderPage extends StatelessWidget {
   const OrderPage({super.key});
   
@@ -19,7 +17,31 @@ class OrderPage extends StatelessWidget {
         stream: FirestorServices.getAllOrders(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot){
           if(!snapshot.hasData){
-            return const Center(child: CircularProgressIndicator(valueColor: AlwaysStoppedAnimation(appBlue),),);
+            return ListView.builder(
+              itemCount: 10,
+              itemBuilder: (BuildContext context, int index){
+                return Padding(
+                  padding: const EdgeInsets.all(15),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Skeleton(35, 30),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Skeleton(15, 230),
+                            5.heightBox,
+                            const Skeleton(20, 130),
+                            5.heightBox,
+                            const Skeleton(14, 150)
+                          ],
+                      ),
+                      const Skeleton(35, 35)
+                    ],
+                  ),
+                );
+              },
+            );
           }else if(snapshot.data!.docs.isEmpty){
             return Center(
               child: Column(

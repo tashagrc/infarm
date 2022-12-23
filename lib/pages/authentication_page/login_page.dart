@@ -53,7 +53,7 @@ class LoginPage extends StatelessWidget {
                               await controller.loginMethod(context: context).then((value){
                                 if(value != null) {
                                   VxToast.show(context, msg: "Berhasil Masuk");
-                                  
+                                  controller.isLoading(false);
                                   Get.offAll(() => const Navigation());
                                 }else{
                                   controller.isLoading(false);

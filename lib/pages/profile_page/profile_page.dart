@@ -85,7 +85,29 @@ class ProfilePage extends StatelessWidget {
                           future: FirestorServices.getCounts(),
                           builder: (BuildContext context, AsyncSnapshot snapshot){
                             if(!snapshot.hasData){
-                              return const Center(child: CircularProgressIndicator(valueColor: AlwaysStoppedAnimation(appBlue),),);
+                              return Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      const Skeleton(15, 30),
+                                      10.heightBox,
+                                      const Skeleton(15, 120)
+                                    ],
+                                  ).box.white.roundedSM.width(context.screenWidth/2.2).height(75).padding(const EdgeInsets.all(4)).make(),
+                                  
+                                  Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      const Skeleton(15, 30),
+                                      10.heightBox,
+                                      const Skeleton(15, 100)
+                                    ],
+                                  ).box.white.roundedSM.width(context.screenWidth/2.2).height(75).padding(const EdgeInsets.all(4)).make(),
+                                ],
+                              );
+
                             }else {
                               var count = snapshot.data;
                               return Row(

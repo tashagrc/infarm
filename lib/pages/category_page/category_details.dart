@@ -3,6 +3,7 @@ import 'package:infarm/constants/constantBuilder.dart';
 import 'package:infarm/controller/product_controller.dart';
 import 'package:infarm/pages/category_page/item_details.dart';
 import 'package:infarm/services/firestore_services.dart';
+import 'package:intl/intl.dart'  as intl;
 
 
 class CategoryDetails extends StatefulWidget {
@@ -163,13 +164,18 @@ class _CategoryDetailsState extends State<CategoryDetails> {
                                 Padding(
                                   padding:
                                       const EdgeInsets.symmetric(horizontal: 8),
-                                  child: "${data[index]['pPrice']}"
-                                      .numCurrencyWithLocale(locale: "id")
-                                      .text
-                                      .fontFamily(bold)
-                                      .color(appYellow)
-                                      .size(16)
-                                      .make(),
+                                  child: Text(
+                                    intl.NumberFormat.currency(
+                                      locale: 'id',
+                                      symbol: 'Rp ',
+                                      decimalDigits: 2,
+                                    ).format(int.parse(data[index]['pPrice'])),
+                                    style: const TextStyle(
+                                      fontFamily: bold,
+                                      fontSize: 16,
+                                      color: appYellow
+                                    ),
+                                  ),
                                 ),
                                 7.heightBox
                               ],
