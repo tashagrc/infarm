@@ -37,9 +37,7 @@ class SearchScreen extends StatelessWidget {
                     5.heightBox,
                     "Hasil Pencarian".text.color(appBlue).size(20).fontFamily(semiBold).make(),
                     "Jumlah produk ditemukan: ${snapshot.data!.size}".text.color(grey).size(15).make(),
-                    5.heightBox,
                     const Divider(thickness: 2,color: lightGrey),
-                    15.heightBox,
                     Expanded(
                       child: GridView(
                         physics: const BouncingScrollPhysics(),
