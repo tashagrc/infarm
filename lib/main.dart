@@ -1,9 +1,12 @@
 import 'package:infarm/constants/constantBuilder.dart';
+import 'package:infarm/pages/onboarding_page/onboarding_page.dart';
 import 'package:infarm/pages/splash_screen.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  FlutterNativeSplash.remove();
   runApp(const MyApp());
 }
 
@@ -27,7 +30,7 @@ class _MyAppState extends State<MyApp> {
         scaffoldBackgroundColor: bgWhite,
         fontFamily: regular,
       ),
-      home: const SplashScreen(),
+      home: const OnboardingPage(),
     );
   }
 }

@@ -1,7 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:infarm/constants/constantBuilder.dart';
-import 'package:infarm/constants/firebaseConstant.dart';
-import 'package:infarm/pages/authentication_page/login_page.dart';
 import 'package:infarm/pages/homescreen_page/navigation.dart';
 import 'package:infarm/pages/onboarding_page/onboarding_page.dart';
 
