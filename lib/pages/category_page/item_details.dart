@@ -336,7 +336,9 @@ class ItemDetails extends StatelessWidget {
                                     10.heightBox,
                                     Padding(
                                       padding: const EdgeInsets.symmetric(horizontal: 8),
-                                      child:"${featuredData[index]['pName']}".text.fontFamily(semiBold).color(darkGrey).make(),
+                                      child:featuredData[index]['pName'].toString().length > 16 
+                                          ?"${featuredData[index]['pName'].toString().substring(0, 16)}...".text.fontFamily(semiBold).color(darkGrey).make()
+                                          :"${featuredData[index]['pName']}".text.fontFamily(semiBold).color(darkGrey).make()
                                     ),
                                     7.heightBox,
                                     Padding(
