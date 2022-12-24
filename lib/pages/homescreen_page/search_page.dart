@@ -36,7 +36,7 @@ class SearchScreen extends StatelessWidget {
                   children: [
                     5.heightBox,
                     "Hasil Pencarian".text.color(appBlue).size(20).fontFamily(semiBold).make(),
-                    "Jumlah produk ditemukan: ${snapshot.data!.size}".text.color(grey).size(15).make(),
+                    "Jumlah produk ditemukan: ${filteredData.length}".text.color(grey).size(15).make(),
                     const Divider(thickness: 2,color: lightGrey),
                     Expanded(
                       child: GridView(
@@ -68,7 +68,6 @@ class SearchScreen extends StatelessWidget {
                               child: filteredData[index]['pName'].toString().length > 27
                                   ?"${filteredData[index]['pName'].toString().substring(0, 27)}...".text.fontFamily(semiBold).color(darkGrey).make()
                                   :"${filteredData[index]['pName']}".text.fontFamily(semiBold).color(darkGrey).make()
-                              // "${filteredData[index]['pName']}".text.fontFamily(semiBold).color(darkGrey).make(),
                             ),
                             10.heightBox,
                             Padding(

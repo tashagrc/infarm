@@ -298,6 +298,9 @@ class _HomePageState extends State<HomePage> {
                                 ClipRRect(
                                     borderRadius: const BorderRadius.only(topLeft: Radius.circular(8), topRight: Radius.circular(8)),
                                     child: FadeInImage.assetNetwork(
+                                      imageErrorBuilder: (context, error, stackTrace) {
+                                        return Image.asset(notLoaded, width: 170, height: 170,);
+                                      },
                                       placeholder: imageLoading,
                                       image: allProductsData[index]['pImages'][0],
                                       width: 200,
